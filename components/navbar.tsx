@@ -2,26 +2,25 @@
 
 import { useState, useEffect, useMemo, useRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Heart, Sparkles } from "lucide-react"
 import { siteConfig } from "@/content/site"
 import StaggeredMenu from "./StaggeredMenu"
 
 const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#countdown", label: "Countdown" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#messages", label: "Messages" },
-  { href: "#details", label: "Details" },
-  { href: "#entourage", label: "Entourage" },
-  { href: "#sponsors", label: "Sponsors" },
-  { href: "#guest-list", label: "RSVP" },
-  { href: "#registry", label: "Registry" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/", label: "Home" },
+  { href: "/our-story", label: "Our Story" },
+  { href: "/entourage", label: "Entourage" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/venue", label: "Venue" },
+  { href: "/rsvp", label: "RSVP" },
+  { href: "/gifts", label: "Gifts" },
 ]
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState("#home")
+  const pathname = usePathname()
+  const activeSection = pathname || "/"
 
   const rafIdRef = useRef<number | null>(null)
 
@@ -41,39 +40,6 @@ export function Navbar() {
     }
   }, [])
 
-  useEffect(() => {
-    if (typeof window === "undefined") return
-    const sectionIds = navLinks.map(l => l.href.substring(1))
-    const elements = sectionIds
-      .map(id => document.getElementById(id))
-      .filter((el): el is HTMLElement => !!el)
-
-    if (elements.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter(e => e.isIntersecting)
-          .sort((a, b) => (b.intersectionRatio - a.intersectionRatio))
-        if (visible.length > 0) {
-          const topMost = visible[0]
-          if (topMost.target && topMost.target.id) {
-            const newActive = `#${topMost.target.id}`
-            setActiveSection(prev => (prev === newActive ? prev : newActive))
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-20% 0px -70% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
-      }
-    )
-
-    elements.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   const menuItems = useMemo(() => navLinks.map((l) => ({ label: l.label, ariaLabel: `Go to ${l.label}`, link: l.href })), [])
 
   return (
@@ -91,7 +57,7 @@ export function Navbar() {
       
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 relative">
         <div className="flex justify-between items-center h-12 sm:h-20">
-          <Link href="#home" className="flex-shrink-0 group relative z-10">
+          <Link href="/" className="flex-shrink-0 group relative z-10">
             <div className="flex flex-col items-start">
               <div className="flex items-center gap-2 sm:gap-2.5 relative">
                 {/* Decorative dots with gold accent */}
@@ -134,7 +100,7 @@ export function Navbar() {
 
           <div className="hidden md:flex gap-1 items-center">
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href
+              const isActive = activeSection === link.href || (link.href === "/" && activeSection === "/")
               return (
                 <Link
                   key={link.href}

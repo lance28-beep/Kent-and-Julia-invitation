@@ -21,10 +21,10 @@ export function Countdown() {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      // Target: December 28, 2025 at 11:00 AM GMT+8
+      // Target: January 22, 2026 at 2:30 PM GMT+8
       // Compute using UTC to avoid timezone parsing inconsistencies across browsers
-      // 11:00 AM GMT+8 == 03:00 AM UTC
-      const targetDate = Date.UTC(2025, 11, 28, 3, 0, 0) // December is month 11 (0-indexed)
+      // 2:30 PM GMT+8 == 06:30 AM UTC
+      const targetDate = Date.UTC(2026, 0, 22, 6, 30, 0) // January is month 0 (0-indexed)
       const now = new Date().getTime()
       const difference = targetDate - now
 
@@ -169,7 +169,7 @@ export function Countdown() {
                   fontStyle: "italic",
                   fontWeight: 300
                 }}>
-                  December
+                  January
                 </p>
               </div>
               
@@ -179,7 +179,7 @@ export function Countdown() {
                 <p className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-serif font-bold text-[#C3A161] leading-none drop-shadow-lg" style={{
                   textShadow: "0 4px 20px rgba(195, 161, 97, 0.3)"
                 }}>
-                  28
+                  22
                 </p>
                 
                 {/* Vertical divider */}
@@ -187,7 +187,7 @@ export function Countdown() {
                 
                 {/* Year - Elegant and refined */}
                 <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#FFFFFF] leading-none">
-                  2025
+                  2026
                 </p>
               </div>
             </div>
@@ -203,7 +203,7 @@ export function Countdown() {
               
               {/* Time */}
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-sans font-medium text-[#C3A161] tracking-wide mb-3 sm:mb-4">
-                11:00 AM
+                2:30 in the Afternoon
               </p>
               
               {/* Bottom decorative dots */}

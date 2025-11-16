@@ -1,350 +1,182 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { motion } from "motion/react"
-import { Instagram, Twitter, Facebook, MapPin, Calendar, Clock, Heart, Music2 } from "lucide-react"
+import { Instagram, Twitter, Facebook, MapPin, Calendar, Clock, Heart, Music2, Sparkles } from "lucide-react"
+import { siteConfig } from "@/content/site"
 
 export function Footer() {
   const year = new Date().getFullYear()
 
-  const quotes = [
-    "In every love story, there's a moment when two hearts become one, and ours is just beginning.",
-    "Two souls, one heart—forever entwined in the journey of love and faith together.",
-    "Love is not about finding the perfect person, but learning to see an imperfect person perfectly."
-  ]
-
-  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0)
-  const [displayedText, setDisplayedText] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-
-  useEffect(() => {
-    if (isPaused) {
-      const pauseTimeout = setTimeout(() => {
-        setIsPaused(false)
-      }, 3000)
-      return () => clearTimeout(pauseTimeout)
-    }
-
-    if (isDeleting) {
-      if (displayedText.length > 0) {
-        const deleteTimeout = setTimeout(() => {
-          setDisplayedText(displayedText.slice(0, -1))
-        }, 30)
-        return () => clearTimeout(deleteTimeout)
-      } else {
-        setIsDeleting(false)
-        setCurrentQuoteIndex((prev) => (prev + 1) % quotes.length)
-      }
-    } else {
-      const currentQuote = quotes[currentQuoteIndex]
-      if (displayedText.length < currentQuote.length) {
-        const typeTimeout = setTimeout(() => {
-          setDisplayedText(currentQuote.slice(0, displayedText.length + 1))
-        }, 50)
-        return () => clearTimeout(typeTimeout)
-      } else {
-        setIsPaused(true)
-        setIsDeleting(true)
-      }
-    }
-  }, [displayedText, isDeleting, isPaused, currentQuoteIndex, quotes])
-
   const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
+    initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   }
-
-  const staggerChildren = {
-    animate: {
-      transition: { staggerChildren: 0.2 },
-    },
-  }
-
-  const nav = [
-    { label: "Home", href: "#home" },
-    { label: "Our Story", href: "#story" },
-    { label: "Events", href: "#events" },
-    { label: "Gallery", href: "#gallery" },
-    { label: "Snap & Share", href: "#snap-share" },
-    { label: "RSVP", href: "#guest-list" },
-  ] as const
 
   return (
     <footer 
-      className="relative z-20 mt-16 text-cream overflow-hidden bg-gradient-to-b from-[#0A3428] via-[#106552] to-[#0A3428]"
+      className="relative z-20 mt-16 text-[#F6E4CC] overflow-hidden bg-gradient-to-b from-[#51181E] via-[#6D2028] to-[#51181E]"
     >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating geometric shapes */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[#751A2C]/12 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-20 right-20 w-24 h-24 bg-[#C3A161]/18 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-20 left-20 w-40 h-40 bg-[#751A2C]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-10 right-10 w-20 h-20 bg-[#C3A161]/16 rounded-full blur-xl animate-pulse" style={{ animationDelay: '0.5s' }} />
+      {/* Enhanced decorative background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Floating orbs */}
+        <div className="absolute top-10 left-10 w-40 h-40 bg-[#6D2028]/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-20 right-20 w-48 h-48 bg-[#BC9751]/12 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute bottom-20 left-20 w-36 h-36 bg-[#6D2028]/8 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '1s' }} />
+        <div className="absolute bottom-10 right-10 w-44 h-44 bg-[#BC9751]/10 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '9s', animationDelay: '0.5s' }} />
         
         {/* Decorative lines */}
-        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#751A2C]/30 to-transparent" />
-        <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#C3A161]/25 to-transparent" />
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#6D2028]/20 to-transparent" />
+        <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#BC9751]/15 to-transparent" />
         
-        {/* Corner decorative elements */}
-        <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-[#751A2C]/15 via-[#C3A161]/10 to-transparent rounded-br-3xl" />
-        <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#751A2C]/15 via-[#C3A161]/10 to-transparent rounded-bl-3xl" />
-        <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-[#751A2C]/15 via-[#C3A161]/10 to-transparent rounded-tr-3xl" />
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-[#751A2C]/15 via-[#C3A161]/10 to-transparent rounded-tl-3xl" />
+        {/* Corner decorations */}
+        <div className="absolute top-0 left-0 w-48 h-48 bg-gradient-to-br from-[#6D2028]/8 via-[#BC9751]/5 to-transparent rounded-br-3xl" />
+        <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-bl from-[#6D2028]/8 via-[#BC9751]/5 to-transparent rounded-bl-3xl" />
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-[#6D2028]/8 via-[#BC9751]/5 to-transparent rounded-tr-3xl" />
+        <div className="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#6D2028]/8 via-[#BC9751]/5 to-transparent rounded-tl-3xl" />
+      </div>
+      
+      {/* Top decorative divider */}
+      <div className="relative z-10 pt-8 pb-4">
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="h-px w-16 sm:w-24 md:w-32 bg-gradient-to-r from-transparent via-[#BC9751]/40 to-[#BC9751]/60" />
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]/70 animate-spin-slow" />
+          <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]/80 fill-[#BC9751]/30 animate-pulse" />
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]/70 animate-spin-slow" style={{ animationDelay: '1s' }} />
+          <div className="h-px w-16 sm:w-24 md:w-32 bg-gradient-to-l from-transparent via-[#BC9751]/40 to-[#BC9751]/60" />
+        </div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-16">
-        {/* Wedding date presentation */}
-        <motion.div className="flex justify-center px-4 mb-16" variants={fadeInUp}>
-          <div className="max-w-2xl w-full">
-            {/* Save The Date Header */}
-            <div className="text-center mb-8 sm:mb-10 md:mb-12">
-              {/* Top decorative dots */}
-              <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/40 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-              </div>
-              
-              {/* Save The Date text */}
-              <p className="text-xs sm:text-sm md:text-base font-sans font-medium text-[#C3A161] uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-3 sm:mb-4">
-                Save The Date
-              </p>
-              
-              {/* Bottom decorative dots */}
-              <div className="flex items-center justify-center gap-2">
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/40 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-              </div>
-            </div>
-
-            {/* Date Section - Elegant Layout */}
-            <div className="text-center mb-8 sm:mb-10 md:mb-12">
-              {/* Month - Elegant script style */}
-              <div className="mb-4 sm:mb-5 md:mb-6">
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif italic text-[#FFFFFF] leading-none" style={{
-                  fontFamily: "var(--font-serif)",
-                  fontStyle: "italic",
-                  fontWeight: 300
-                }}>
-                  December
-                </p>
-              </div>
-              
-              {/* Day and Year - Horizontal layout with divider */}
-              <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-6 sm:mb-8">
-                {/* Day - Large and bold focal point */}
-                <p className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-serif font-bold text-[#C3A161] leading-none drop-shadow-lg" style={{
-                  textShadow: "0 4px 20px rgba(195, 161, 97, 0.3)"
-                }}>
-                  28
-                </p>
-                
-                {/* Vertical divider */}
-                <div className="h-16 sm:h-20 md:h-24 lg:h-28 w-px bg-[#C3A161]/50" />
-                
-                {/* Year - Elegant and refined */}
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light text-[#FFFFFF] leading-none">
-                  2025
-                </p>
-              </div>
-            </div>
-
-            {/* Time Section */}
-            <div className="text-center">
-              {/* Top decorative dots */}
-              <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/40 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-              </div>
-              
-              {/* Time */}
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-sans font-medium text-[#C3A161] tracking-wide mb-3 sm:mb-4">
-                11:00 AM
-              </p>
-              
-              {/* Bottom decorative dots */}
-              <div className="flex items-center justify-center gap-2">
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/40 rounded-full" />
-                <div className="w-1 h-1 bg-[#C3A161]/60 rounded-full" />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div className="grid grid-cols-1 lg:grid-cols-4 gap-10 mb-12" variants={staggerChildren} initial="initial" animate="animate">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pb-8">
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" variants={fadeInUp} initial="initial" animate="animate">
           {/* Couple Info */}
-          <motion.div className="lg:col-span-2" variants={fadeInUp}>
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-white/15 rounded-full flex items-center justify-center border border-white/20">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-serif text-3xl md:text-4xl font-bold text-white">Brendan & Airez</h3>
+          <motion.div variants={fadeInUp} className="relative">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-1.5 bg-[#F6E4CC]/10 rounded-full border border-[#BC9751]/30">
+                <Heart className="w-4 h-4 text-[#BC9751] fill-[#BC9751]/40" />
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 font-lora text-white/95">
-                  <Calendar className="w-5 h-5 text-white/80" />
-                  <span className="text-lg">December 28, 2025</span>
-                </div>
-                <div className="flex items-center gap-3 font-lora text-white/90">
-                  <MapPin className="w-5 h-5 text-white/70" />
-                  <span>SMDC Jazz Residence</span>
-                </div>
+              <h3 className="font-sans text-xl font-bold text-[#FFFFFF]">
+                {siteConfig.couple.groomNickname} & {siteConfig.couple.brideNickname}
+              </h3>
+            </div>
+            <div className="space-y-1.5 text-[#F6E4CC]/90 text-sm">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                <span>{siteConfig.wedding.date}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                <span>{siteConfig.wedding.time}</span>
               </div>
             </div>
-
-            <motion.div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/15" whileHover={{ scale: 1.02 }} transition={{ duration: 0.3 }}>
-              <blockquote className="font-lora text-white/95 italic text-lg leading-relaxed min-h-[80px]">
-                "{displayedText}
-                <span className="inline-block w-0.5 h-6 bg-white/95 ml-1 animate-pulse">|</span>"
-              </blockquote>
-              <div className="flex items-center gap-2 mt-4">
-                <div className="w-2 h-2 bg-white/70 rounded-full" />
-                <div className="w-2 h-2 bg-white/50 rounded-full" />
-                <div className="w-2 h-2 bg-white/70 rounded-full" />
-              </div>
-            </motion.div>
           </motion.div>
 
-          {/* Event Details quick tiles */}
-          <motion.div className="space-y-6" variants={fadeInUp}>
-            <motion.div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/15 hover:bg-white/10 transition-all duration-300" whileHover={{ y: -5 }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-white/15 rounded-full flex items-center justify-center border border-white/20">
-                  <Clock className="w-5 h-5 text-white" />
+          {/* Event Details */}
+          <motion.div className="space-y-4" variants={fadeInUp}>
+            <div className="bg-[#F6E4CC]/5 backdrop-blur-sm rounded-lg px-4 py-3 border border-[#BC9751]/20">
+              <h4 className="font-semibold text-[#FFFFFF] mb-2.5 flex items-center gap-2 text-sm font-sans">
+                <div className="p-1 bg-[#F6E4CC]/10 rounded border border-[#BC9751]/30">
+                  <Clock className="w-3.5 h-3.5 text-[#BC9751]" />
                 </div>
-                <h4 className="font-playfair font-bold text-xl text-white">Ceremony</h4>
-              </div>
-              <div className="space-y-3 font-lora text-white/90 text-sm">
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-white/70" />
-                  <span>SMDC Jazz Residence</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-white/70" />
-                  <span>11:00 AM</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/15 hover:bg-white/10 transition-all duration-300" whileHover={{ y: -5 }}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-white/15 rounded-full flex items-center justify-center border border-white/20">
-                  <Heart className="w-5 h-5 text-white" />
-                </div>
-                <h4 className="font-playfair font-bold text-xl text-white">Reception</h4>
-              </div>
-              <div className="space-y-3 font-lora text-white/90 text-sm">
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-4 h-4 text-white/70" />
-                  <span>SMDC Jazz Residence</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Clock className="w-4 h-4 text-white/70" />
-                  <span>12:00 NN</span>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact + Quick Links */}
-          <motion.div className="space-y-8" variants={fadeInUp}>
-            <div>
-              <h4 className="font-playfair font-bold text-xl mb-6 flex items-center gap-3 text-white">
-                <div className="w-2 h-8 bg-white/50 rounded-full" /> Follow Us
+                Ceremony
               </h4>
-              <div className="flex items-center gap-3 flex-wrap">
-                <a 
-                  href="https://www.facebook.com/airezjoy" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition-colors hover:scale-110"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="w-5 h-5 text-white" />
-                </a>
-                <a 
-                  href="https://www.instagram.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition-colors hover:scale-110"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="w-5 h-5 text-white" />
-                </a>
-                <a 
-                  href="https://www.tiktok.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition-colors hover:scale-110"
-                  aria-label="TikTok"
-                >
-                  <Music2 className="w-5 h-5 text-white" />
-                </a>
-                <a 
-                  href="https://www.twitter.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 ring-1 ring-white/15 hover:bg-white/10 transition-colors hover:scale-110"
-                  aria-label="Twitter"
-                >
-                  <Twitter className="w-5 h-5 text-white" />
-                </a>
+              <div className="space-y-1.5 text-[#F6E4CC]/90 text-sm">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                  <span>{siteConfig.ceremony.location}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                  <span>{siteConfig.ceremony.time}</span>
+                </div>
               </div>
             </div>
 
-            <div>
-              <h5 className="font-playfair font-bold text-lg mb-4 text-white">Quick Links</h5>
-              <div className="space-y-2">
-                {nav.map((item) => (
-                  <a key={item.href} href={item.href} className="block text-white/80 hover:text-white transition-colors duration-200 font-lora text-sm">
-                    {item.label}
-                  </a>
-                ))}
+            <div className="bg-[#F6E4CC]/5 backdrop-blur-sm rounded-lg px-4 py-3 border border-[#BC9751]/20">
+              <h4 className="font-semibold text-[#FFFFFF] mb-2.5 flex items-center gap-2 text-sm font-sans">
+                <div className="p-1 bg-[#F6E4CC]/10 rounded border border-[#BC9751]/30">
+                  <Heart className="w-3.5 h-3.5 text-[#BC9751]" />
+                </div>
+                Reception
+              </h4>
+              <div className="space-y-1.5 text-[#F6E4CC]/90 text-sm">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                  <span>{siteConfig.reception.location}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-3.5 h-3.5 text-[#F6E4CC]/70" />
+                  <span>{siteConfig.reception.time}</span>
+                </div>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div variants={fadeInUp} className="relative">
+            <h4 className="font-semibold text-[#FFFFFF] mb-4 text-sm flex items-center gap-2 font-sans">
+              <Sparkles className="w-3.5 h-3.5 text-[#BC9751]" />
+              Follow Us
+            </h4>
+            <div className="flex items-center gap-3 flex-wrap">
+              <a 
+                href="https://www.facebook.com/airezjoy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#F6E4CC]/5 hover:bg-[#F6E4CC]/10 border border-[#BC9751]/20 hover:border-[#BC9751]/40 transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-4 h-4 text-[#F6E4CC]" />
+              </a>
+              <a 
+                href="https://www.instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#F6E4CC]/5 hover:bg-[#F6E4CC]/10 border border-[#BC9751]/20 hover:border-[#BC9751]/40 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4 text-[#F6E4CC]" />
+              </a>
+              <a 
+                href="https://www.tiktok.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#F6E4CC]/5 hover:bg-[#F6E4CC]/10 border border-[#BC9751]/20 hover:border-[#BC9751]/40 transition-colors"
+                aria-label="TikTok"
+              >
+                <Music2 className="w-4 h-4 text-[#F6E4CC]" />
+              </a>
+              <a 
+                href="https://www.twitter.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#F6E4CC]/5 hover:bg-[#F6E4CC]/10 border border-[#BC9751]/20 hover:border-[#BC9751]/40 transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-4 h-4 text-[#F6E4CC]" />
+              </a>
             </div>
           </motion.div>
         </motion.div>
 
         {/* Bottom Row */}
-        <motion.div className="border-t border-white/20 pt-8" variants={fadeInUp}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-white/85 font-lora text-sm">© {year} Brendan & Airez. All rights reserved.</p>
-              <p className="text-white/90 font-lora text-sm mt-1">
-                Made with 💕 for our special day
-              </p>
-            </div>
-            
-            <div className="text-center md:text-right space-y-1">
-              <p className="text-white/80 font-lora text-xs">
-                Developed by{" "}
-                <a 
-                  href="https://lance28-beep.github.io/portfolio-website/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors duration-200 underline decoration-white/50 hover:decoration-white/70"
-                >
-                  Lance Valle
-                </a>
-              </p>
-              <p className="text-white/80 font-lora text-xs">
-                Want a website like this? Visit{" "}
-                <a 
-                  href="https://www.facebook.com/WeddingInvitationNaga" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-white/80 transition-colors duration-200 underline decoration-white/50 hover:decoration-white/70"
-                >
-                  Wedding Invitation Naga
-                </a>
-              </p>
-            </div>
+        <motion.div className="border-t border-[#BC9751]/20 pt-6 mt-6" variants={fadeInUp}>
+          {/* Decorative divider */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#BC9751]/30" />
+            <Heart className="w-3 h-3 text-[#BC9751]/60 fill-[#BC9751]/20 animate-pulse" />
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#BC9751]/30" />
+          </div>
+          
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-center">
+            <p className="text-[#F6E4CC]/80 text-xs font-sans">
+              © {year} {siteConfig.couple.groomNickname} & {siteConfig.couple.brideNickname}. All rights reserved.
+            </p>
+            <p className="text-[#F6E4CC]/70 text-xs flex items-center gap-1.5 font-sans">
+              <span>Made with</span>
+              <Heart className="w-3 h-3 text-[#BC9751]/80 fill-[#BC9751]/40" />
+              <span>for our special day</span>
+            </p>
           </div>
         </motion.div>
 

@@ -73,13 +73,6 @@ export function Narrative() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#FFFFFF]/85 via-[#FFFFFF]/70 to-[#FFFFFF]/85 backdrop-blur-md z-10"></div>
 
-      {/* Bottom-right flower decoration (above layered background) */}
-      <img
-        src="/decoration/flower-bg-left-down.png"
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 z-20 w-32 sm:w-40 md:w-52 lg:w-60 opacity-90 select-none pointer-events-none"
-      />
       {/* Overlay for a slight warmth effect for theme harmony */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-[#C3A161]/60 to-transparent mix-blend-multiply"></div>
 

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { X, ChevronLeft, ChevronRight } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, Upload } from "lucide-react"
 import { Section } from "@/components/section"
 // Removed circular gallery in favor of a responsive masonry layout
 
@@ -317,8 +317,8 @@ export function Gallery() {
           </div>
         </div>
       )}
-      {/* View more button */}
-      <div className="relative z-10 mt-10 sm:mt-12 md:mt-16 flex justify-center px-4">
+      {/* Action buttons */}
+      <div className="relative z-10 mt-10 sm:mt-12 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-4">
         <a
           href="/gallery"
           className="group inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"
@@ -345,6 +345,37 @@ export function Gallery() {
           <ChevronRight size={16} className="sm:w-5 sm:h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
           <div 
             className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C3A161]/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"
+          />
+        </a>
+        
+        <a
+          href="https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/share inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"
+          style={{
+            backgroundColor: "rgba(188, 151, 81, 0.95)",
+            borderColor: "rgba(188, 151, 81, 0.6)",
+            color: "#FFFFFF",
+            boxShadow: "0 4px 20px rgba(188, 151, 81, 0.4), 0 2px 6px rgba(0,0,0,0.3)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "#BC9751";
+            e.currentTarget.style.borderColor = "rgba(188, 151, 81, 0.9)";
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "0 8px 30px rgba(188, 151, 81, 0.6), 0 4px 12px rgba(0,0,0,0.4)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "rgba(188, 151, 81, 0.95)";
+            e.currentTarget.style.borderColor = "rgba(188, 151, 81, 0.6)";
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "0 4px 20px rgba(188, 151, 81, 0.4), 0 2px 6px rgba(0,0,0,0.3)";
+          }}
+        >
+          <Upload size={16} className="sm:w-5 sm:h-5 relative z-10 transition-transform duration-300 group-hover/share:translate-y-[-2px]" />
+          <span className="relative z-10">Share Your Photos</span>
+          <div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/share:opacity-100 transition-all duration-700 transform -skew-x-12 -translate-x-full group-hover/share:translate-x-full"
           />
         </a>
       </div>

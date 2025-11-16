@@ -1,282 +1,270 @@
 "use client"
 
-import { useEffect, useState, useMemo } from "react"
-import { siteConfig } from "@/content/site"
-import { Heart, Sparkles } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Heart, Sparkles, MapPin, Church, Calendar, Clock } from "lucide-react"
 
-const desktopImages = [
-    "/desktop-background/couple (1).jpg",
-    "/desktop-background/couple (2).jpg",
-    "/desktop-background/couple (3).jpg",
-    "/desktop-background/couple (4).jpg",
-]
-
-const mobileImages = [
-    "/mobile-background/couple (1).jpg",
-    "/mobile-background/couple (2).jpg",
-    "/mobile-background/couple (3).jpg",
-    "/mobile-background/couple (4).jpg",
-    "/mobile-background/couple (5).jpg",
-    "/mobile-background/couple (6).jpg",
-    "/mobile-background/couple (7).jpg",
-    "/mobile-background/couple (8).jpg",
-    "/mobile-background/couple (9).jpg",
-    "/mobile-background/couple (10).jpg",
-    "/mobile-background/couple (11).jpg",
-    "/mobile-background/couple (12).jpg",
-    "/mobile-background/couple (13).jpg",
-    "/mobile-background/couple (14).jpg",
-    "/mobile-background/couple (15).jpg",
-    "/mobile-background/couple (16).jpg",
-    "/mobile-background/couple (17).jpg",
-    "/mobile-background/couple (18).jpg",
-    "/mobile-background/couple (19).jpg",
-    "/mobile-background/couple (20).jpg",
-    "/mobile-background/couple (21).jpg",
-    "/mobile-background/couple (22).jpg",
-    "/mobile-background/couple (23).jpg",
-]
+interface TimeLeft {
+  days: number
+  hours: number
+  minutes: number
+  seconds: number
+}
 
 export function Hero() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [imagesLoaded, setImagesLoaded] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [showInvitation, setShowInvitation] = useState(false)
+  const [showCountdown, setShowCountdown] = useState(false)
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  })
 
-  // Detect screen size and update isMobile state
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768) // md breakpoint
-    }
-    
-    // Check on mount
-    checkScreenSize()
-    
-    // Listen for resize events
-    window.addEventListener('resize', checkScreenSize)
-    
-    return () => window.removeEventListener('resize', checkScreenSize)
+    setIsVisible(true)
+    setTimeout(() => setShowInvitation(true), 300)
+    setTimeout(() => setShowCountdown(true), 600)
   }, [])
 
-  // Get the appropriate image array based on screen size
-  const backgroundImages = useMemo(() => {
-    return isMobile ? mobileImages : desktopImages
-  }, [isMobile])
-
-  // Preload images progressively - show first image immediately
   useEffect(() => {
-    setImagesLoaded(false)
-    setCurrentImageIndex(0)
-    
-    // Load first image with priority to show it immediately
-    const firstImg = new Image()
-    firstImg.src = backgroundImages[0]
-    firstImg.onload = () => {
-      setImagesLoaded(true) // Show first image immediately
+    const calculateTimeLeft = () => {
+      // Target: January 22, 2026 at 2:30 PM GMT+8
+      // 2:30 PM GMT+8 == 06:30 AM UTC
+      const targetDate = Date.UTC(2026, 0, 22, 6, 30, 0) // January is month 0
+      const now = new Date().getTime()
+      const difference = targetDate - now
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        })
+      } else {
+        setTimeLeft({
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        })
+      }
     }
-    
-    // Then preload a small lookahead set in background (avoid preloading all)
-    setTimeout(() => {
-      if (typeof navigator !== 'undefined' && (navigator as any).connection?.saveData) return
-      backgroundImages.slice(1, 3).forEach((src) => {
-        const img = new Image()
-        img.decoding = 'async'
-        img.loading = 'lazy' as any
-        img.src = src
-      })
-    }, 200)
-  }, [backgroundImages])
 
-  useEffect(() => {
-    if (!imagesLoaded) return
-    
-    const imageTimer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % backgroundImages.length)
-    }, 5000)
-    return () => clearInterval(imageTimer)
-  }, [imagesLoaded, backgroundImages])
-
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    if (imagesLoaded) {
-      setIsVisible(true)
-    }
-  }, [imagesLoaded])
+    calculateTimeLeft()
+    const timer = setInterval(calculateTimeLeft, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A3428]">
-      <div className="absolute inset-0 w-full h-full">
-        {imagesLoaded && backgroundImages.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-[1500ms] ease-in-out ${
-              index === currentImageIndex ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-              backgroundImage: `url('${image}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              willChange: "opacity",
-            }}
-          />
-        ))}
-        {/* Enhanced gradient overlay with better depth */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A3428]/95 via-[#0A3428]/50 via-[#0A3428]/30 to-transparent z-0" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0A3428]/20 z-0" />
+    <section id="home" className="relative flex items-center justify-center overflow-hidden min-h-screen">
+      {/* Enhanced decorative background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-[#BC9751]/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#BC9751]/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#BC9751]/3 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 flex flex-col items-center justify-end min-h-screen pb-12 sm:pb-20 md:pb-28 lg:pb-40 xl:pb-48">
-        <div className={`w-full max-w-4xl text-center space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 transition-all duration-1000 ease-out ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          {/* Warm invitation line */}
-          <div className="space-y-2 sm:space-y-3 mb-2 sm:mb-4">
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl font-light text-[#FFFFFF]/90 drop-shadow-lg tracking-wide">
-              We are delighted to invite you to celebrate our special day
-            </p>
-            {/* Decorative divider with gold accent */}
-            <div className="flex items-center justify-center gap-3 sm:gap-4 py-1">
-              <div className="h-px w-12 sm:w-16 md:w-20 bg-gradient-to-r from-transparent via-[#C3A161]/60 to-[#C3A161]" />
-              <Heart size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#C3A161] fill-[#C3A161]/40 drop-shadow-md animate-pulse" />
-              <Sparkles size={12} className="sm:w-3 sm:h-3 md:w-4 md:h-4 text-[#C3A161]/80 drop-shadow-md" />
-              <Heart size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#C3A161] fill-[#C3A161]/40 drop-shadow-md animate-pulse" />
-              <div className="h-px w-12 sm:w-16 md:w-20 bg-gradient-to-l from-transparent via-[#C3A161]/60 to-[#C3A161]" />
-            </div>
-          </div>
+      <div className="relative z-10 w-full container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 lg:py-28">
+        <div className="w-full max-w-5xl text-center space-y-8 sm:space-y-10 md:space-y-12 lg:space-y-14">
+          {/* Subtle decorative elements */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-[#BC9751]/30 to-transparent" />
+          {/* Romantic Copywriting Section */}
+          <div className="space-y-8 sm:space-y-10 md:space-y-12">
+            {/* First Line */}
+            <div className={`space-y-4 sm:space-y-5 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light text-[#FFFFFF]/95 drop-shadow-lg tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.25em] uppercase">
+                WITH JOYFUL HEARTS, WE INVITE YOU TO CELEBRATE
+              </p>
+              
+              {/* Decorative divider with enhanced animation */}
+              <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 py-3">
+                <div className="h-px w-16 sm:w-20 md:w-24 lg:w-32 bg-gradient-to-r from-transparent via-[#BC9751]/70 to-[#BC9751] animate-expand" />
+                <Heart size={16} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#BC9751] fill-[#BC9751]/50 drop-shadow-lg animate-pulse" />
+                <Sparkles size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#BC9751]/90 drop-shadow-lg animate-spin-slow" />
+                <Heart size={16} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#BC9751] fill-[#BC9751]/50 drop-shadow-lg animate-pulse" style={{ animationDelay: '0.5s' }} />
+                <div className="h-px w-16 sm:w-20 md:w-24 lg:w-32 bg-gradient-to-l from-transparent via-[#BC9751]/70 to-[#BC9751] animate-expand" style={{ animationDelay: '0.3s' }} />
+              </div>
 
-          {/* Couple names - keeping the arrangement as requested */}
-          <div className="space-y-3 sm:space-y-4 md:space-y-5">
-            <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold tracking-[0.02em] sm:tracking-[0.03em] md:tracking-[0.04em] drop-shadow-2xl leading-tight"
-              style={{
-                color: '#FFFFFF',
-                textShadow: "0 2px 20px rgba(195, 161, 97, 0.4), 0 4px 40px rgba(10, 52, 40, 0.6), 0 8px 60px rgba(0, 0, 0, 0.5)",
-                fontFamily: "var(--font-serif)",
-                letterSpacing: "0.05em",
-              }}
-            >
-              <span className="inline-block transform transition-all duration-700 hover:scale-105">
-                {siteConfig.couple.groomNickname}
-              </span>
-              <span className="mx-2 sm:mx-3 md:mx-4 text-[#C3A161]">&</span>
-              <span className="inline-block transform transition-all duration-700 hover:scale-105">
-                {siteConfig.couple.brideNickname}
-              </span>
-            </h1>
-            {/* Elegant divider */}
-            <div className="h-0.5 sm:h-1 w-20 sm:w-24 md:w-32 lg:w-40 mx-auto bg-gradient-to-r from-transparent via-[#C3A161] to-transparent shadow-[0_0_10px_rgba(195,161,97,0.5)]" />
-          </div>
-
-          {/* Tagline with improved typography */}
-          <div className="space-y-3 sm:space-y-4 md:space-y-5 pt-2 sm:pt-4">
-            <p
-              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-serif font-light italic text-[#FFFFFF] drop-shadow-lg tracking-wide"
-              style={{
-                textShadow: "0 2px 12px rgba(10, 52, 40, 0.8), 0 1px 4px rgba(0,0,0,0.7)",
-              }}
-            >
-              {siteConfig.wedding.tagline}
-            </p>
-
-            {/* Date and time information */}
-            <div className="space-y-2 sm:space-y-2.5 md:space-y-3 pt-2">
-              <p
-                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light text-[#FFFFFF] drop-shadow-lg"
+              {/* Couple Names */}
+              <h1
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-[0.02em] sm:tracking-[0.03em] md:tracking-[0.04em] drop-shadow-2xl leading-tight"
                 style={{
-                  textShadow: "0 2px 10px rgba(10, 52, 40, 0.8), 0 1px 3px rgba(0,0,0,0.7)",
+                  color: '#FFFFFF',
+                  textShadow: "0 4px 30px rgba(188, 151, 81, 0.5), 0 8px 50px rgba(81, 24, 30, 0.7), 0 12px 80px rgba(0, 0, 0, 0.6)",
+                  fontFamily: "var(--font-serif)",
+                  letterSpacing: "0.05em",
                 }}
               >
-                {siteConfig.ceremony.day}, {siteConfig.ceremony.date}
-              </p>
-              <p
-                className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-[#C3A161] drop-shadow-lg tracking-wider"
-                style={{
-                  textShadow: "0 2px 10px rgba(10, 52, 40, 0.9), 0 1px 4px rgba(195, 161, 97, 0.4)",
-                }}
-              >
-                {siteConfig.ceremony.time} • {siteConfig.wedding.venue.toUpperCase()}
-              </p>
+                <span className="inline-block transform transition-all duration-700 hover:scale-110 hover:text-[#BC9751]/90">
+                  Kent
+                </span>
+                <span className="mx-3 sm:mx-4 md:mx-5 lg:mx-6 text-[#BC9751] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl drop-shadow-lg">&</span>
+                <span className="inline-block transform transition-all duration-700 hover:scale-110 hover:text-[#BC9751]/90">
+                  Julia
+                </span>
+              </h1>
             </div>
-          </div>
 
-          {/* CTA Buttons - Horizontal layout on all devices */}
-          <div className="pt-6 sm:pt-8 md:pt-10 lg:pt-12 flex flex-row gap-2 sm:gap-3 md:gap-4 justify-center items-center max-w-2xl mx-auto w-full px-2">
-            <a
-              href="#narrative"
-              className="group flex-1 max-w-[200px] sm:max-w-none sm:min-w-[160px] md:min-w-[180px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-500 ease-out uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"
-              style={{
-                backgroundColor: "rgba(16, 101, 82, 0.95)",
-                borderColor: "rgba(195, 161, 97, 0.4)",
-                color: "#FFFFFF",
-                boxShadow: "0 4px 20px rgba(10, 52, 40, 0.4), 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#106552";
-                e.currentTarget.style.borderColor = "rgba(195, 161, 97, 0.7)";
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 8px 30px rgba(16, 101, 82, 0.6), 0 4px 12px rgba(0,0,0,0.4), 0 0 20px rgba(195, 161, 97, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(16, 101, 82, 0.95)";
-                e.currentTarget.style.borderColor = "rgba(195, 161, 97, 0.4)";
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(10, 52, 40, 0.4), 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "translateY(-1px) scale(0.98)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-              }}
-            >
-              <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
-                Our Love Story
-                <Heart size={12} className="w-3 h-3 sm:w-4 sm:h-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0" />
-              </span>
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C3A161]/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"
-              />
-            </a>
-            <a
-              href="#guest-list"
-              className="group flex-1 max-w-[200px] sm:max-w-none sm:min-w-[160px] md:min-w-[180px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 md:py-3.5 lg:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-500 ease-out uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"
-              style={{
-                backgroundColor: "rgba(117, 26, 44, 0.95)",
-                borderColor: "rgba(195, 161, 97, 0.4)",
-                color: "#FFFFFF",
-                boxShadow: "0 4px 20px rgba(117, 26, 44, 0.4), 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#751A2C";
-                e.currentTarget.style.borderColor = "rgba(195, 161, 97, 0.7)";
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-                e.currentTarget.style.boxShadow = "0 8px 30px rgba(117, 26, 44, 0.6), 0 4px 12px rgba(0,0,0,0.4), 0 0 20px rgba(195, 161, 97, 0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "rgba(117, 26, 44, 0.95)";
-                e.currentTarget.style.borderColor = "rgba(195, 161, 97, 0.4)";
-                e.currentTarget.style.transform = "translateY(0) scale(1)";
-                e.currentTarget.style.boxShadow = "0 4px 20px rgba(117, 26, 44, 0.4), 0 2px 6px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)";
-              }}
-              onMouseDown={(e) => {
-                e.currentTarget.style.transform = "translateY(-1px) scale(0.98)";
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.transform = "translateY(-3px) scale(1.02)";
-              }}
-            >
-              <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
-                RSVP
-                <Sparkles size={12} className="w-3 h-3 sm:w-4 sm:h-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300 flex-shrink-0" />
-              </span>
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-[#FFFFFF]/25 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -skew-x-12 -translate-x-full group-hover:translate-x-full"
-              />
-            </a>
+            {/* Second Section - Invitation Text */}
+            <div className={`pt-8 sm:pt-10 md:pt-12 mb-0 pb-0 transition-all duration-1000 ease-out delay-300 ${
+              showInvitation ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {/* Decorative divider with glow */}
+              <div className="h-0.5 sm:h-1 md:h-1.5 w-24 sm:w-32 md:w-40 lg:w-48 mx-auto bg-gradient-to-r from-transparent via-[#BC9751] to-transparent shadow-[0_0_15px_rgba(188,151,81,0.6)] animate-expand mb-5 sm:mb-6 md:mb-7 lg:mb-8" style={{ animationDelay: '0.6s' }} />
+              
+              <div className="space-y-5 sm:space-y-6 md:space-y-7 lg:space-y-8 px-4 sm:px-6 md:px-8 lg:px-12 mb-0 pb-0">
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FFFFFF]/98 drop-shadow-xl leading-relaxed bonheur-royale-regular mb-0 pb-0">
+                  Together with our beloved families,
+                </p>
+                
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FFFFFF]/98 drop-shadow-xl leading-relaxed bonheur-royale-regular mb-0 pb-0">
+                  we humbly request the honor of your presence
+                </p>
+                
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FFFFFF]/98 drop-shadow-xl leading-relaxed bonheur-royale-regular mb-0 pb-0">
+                  as we unite in marriage and begin our journey together.
+                </p>
+              </div>
+            </div>
+
+            {/* Countdown Section */}
+            <div className={`space-y-8 sm:space-y-10 md:space-y-12 pt-10 sm:pt-12 md:pt-14 lg:pt-16 transition-all duration-1000 ease-out delay-500 ${
+              showCountdown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {/* Date and Time Display */}
+              <div className="space-y-4 sm:space-y-5 md:space-y-6 bg-white/5 backdrop-blur-md rounded-2xl px-6 sm:px-8 md:px-10 py-6 sm:py-8 md:py-10 border border-[#BC9751]/20 shadow-xl max-w-2xl mx-auto">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Calendar className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#BC9751]" />
+                  <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-[#FFFFFF] drop-shadow-lg">
+                    January 22, 2026
+                  </p>
+                </div>
+                <div className="flex items-center justify-center gap-3">
+                  <Clock className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-[#BC9751]" />
+                  <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-[#BC9751] drop-shadow-lg bonheur-royale-regular">
+                    2:30 in the Afternoon
+                  </p>
+                </div>
+              </div>
+
+              {/* Countdown Timer */}
+              <div className="grid grid-cols-2 md:flex md:justify-center md:items-center gap-4 sm:gap-5 md:gap-6 lg:gap-8 max-w-3xl mx-auto">
+                <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+                  <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl px-6 py-5 sm:px-8 sm:py-6 md:px-7 md:py-5 lg:px-8 lg:py-6 border border-[#BC9751]/40 shadow-xl hover:shadow-2xl hover:border-[#BC9751]/60 transition-all duration-300 w-full sm:w-auto min-w-[130px] sm:min-w-[150px] md:min-w-[120px] lg:min-w-[140px]">
+                    <p className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#FFFFFF] text-center drop-shadow-lg">
+                      {String(timeLeft.days).padStart(2, '0')}
+                    </p>
+                  </div>
+                  <span className="text-xs sm:text-sm md:text-base text-[#BC9751]/90 mt-3 uppercase tracking-wider font-medium">
+                    Days
+                  </span>
+                </div>
+                <div className="hidden md:flex items-center text-[#BC9751] text-3xl sm:text-4xl lg:text-5xl font-light animate-pulse">:</div>
+
+                <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+                  <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl px-6 py-5 sm:px-8 sm:py-6 md:px-7 md:py-5 lg:px-8 lg:py-6 border border-[#BC9751]/40 shadow-xl hover:shadow-2xl hover:border-[#BC9751]/60 transition-all duration-300 w-full sm:w-auto min-w-[130px] sm:min-w-[150px] md:min-w-[120px] lg:min-w-[140px]">
+                    <p className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#FFFFFF] text-center drop-shadow-lg">
+                      {String(timeLeft.hours).padStart(2, '0')}
+                    </p>
+                  </div>
+                  <span className="text-xs sm:text-sm md:text-base text-[#BC9751]/90 mt-3 uppercase tracking-wider font-medium">
+                    Hours
+                  </span>
+                </div>
+
+                <div className="hidden md:flex items-center text-[#BC9751] text-3xl sm:text-4xl lg:text-5xl font-light animate-pulse">:</div>
+
+                <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+                  <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl px-6 py-5 sm:px-8 sm:py-6 md:px-7 md:py-5 lg:px-8 lg:py-6 border border-[#BC9751]/40 shadow-xl hover:shadow-2xl hover:border-[#BC9751]/60 transition-all duration-300 w-full sm:w-auto min-w-[130px] sm:min-w-[150px] md:min-w-[120px] lg:min-w-[140px]">
+                    <p className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#FFFFFF] text-center drop-shadow-lg">
+                      {String(timeLeft.minutes).padStart(2, '0')}
+                    </p>
+                  </div>
+                  <span className="text-xs sm:text-sm md:text-base text-[#BC9751]/90 mt-3 uppercase tracking-wider font-medium">
+                    Minutes
+                  </span>
+                </div>
+
+                <div className="hidden md:flex items-center text-[#BC9751] text-3xl sm:text-4xl lg:text-5xl font-light animate-pulse" style={{ animationDelay: '0.5s' }}>:</div>
+
+                <div className="flex flex-col items-center transform transition-all duration-300 hover:scale-105">
+                  <div className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-xl px-6 py-5 sm:px-8 sm:py-6 md:px-7 md:py-5 lg:px-8 lg:py-6 border border-[#BC9751]/40 shadow-xl hover:shadow-2xl hover:border-[#BC9751]/60 transition-all duration-300 w-full sm:w-auto min-w-[130px] sm:min-w-[150px] md:min-w-[120px] lg:min-w-[140px]">
+                    <p className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#FFFFFF] text-center drop-shadow-lg">
+                      {String(timeLeft.seconds).padStart(2, '0')}
+                    </p>
+                  </div>
+                  <span className="text-xs sm:text-sm md:text-base text-[#BC9751]/90 mt-3 uppercase tracking-wider font-medium">
+                    Seconds
+                  </span>
+                </div>
+              </div>
+
+              {/* Venue and Ceremony Information */}
+              <div className="space-y-6 sm:space-y-8 pt-10 sm:pt-12 md:pt-14">
+                {/* Decorative divider */}
+                <div className="h-px w-32 sm:w-40 md:w-48 lg:w-56 mx-auto bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent shadow-[0_0_10px_rgba(188,151,81,0.3)]" />
+                
+                {/* Save the Date */}
+                <p className="text-sm sm:text-base md:text-lg text-[#BC9751] font-light tracking-[0.25em] uppercase text-center drop-shadow-lg font-sans">
+                  Save the Date
+                </p>
+
+                {/* Venue and Ceremony Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 max-w-4xl mx-auto">
+                  {/* Ceremony Card */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 border border-[#BC9751]/30 shadow-lg hover:shadow-xl hover:border-[#BC9751]/50 hover:scale-105 transition-all duration-300 transform group">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="mt-1 flex-shrink-0 p-2 sm:p-2.5 bg-[#BC9751]/20 rounded-lg group-hover:bg-[#BC9751]/30 transition-colors">
+                        <Church className="w-5 h-5 sm:w-6 sm:h-6 text-[#BC9751]" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm text-[#BC9751] font-semibold uppercase tracking-wide mb-2 sm:mb-3 font-sans">
+                          Ceremony
+                        </p>
+                        <div className="space-y-1">
+                          <p className="text-sm sm:text-base md:text-lg text-[#FFFFFF] font-semibold leading-relaxed font-sans">
+                            San Roque Parish
+                          </p>
+                          <p className="text-xs sm:text-sm text-[#F6E4CC]/80 font-light leading-relaxed font-sans">
+                            Cordova, Cebu
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Venue Card */}
+                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md rounded-xl px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 border border-[#BC9751]/30 shadow-lg hover:shadow-xl hover:border-[#BC9751]/50 hover:scale-105 transition-all duration-300 transform group">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="mt-1 flex-shrink-0 p-2 sm:p-2.5 bg-[#BC9751]/20 rounded-lg group-hover:bg-[#BC9751]/30 transition-colors">
+                        <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#BC9751]" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm text-[#BC9751] font-semibold uppercase tracking-wide mb-2 sm:mb-3 font-sans">
+                          Venue
+                        </p>
+                        <div className="space-y-1">
+                          <p className="text-sm sm:text-base md:text-lg text-[#FFFFFF] font-semibold leading-relaxed font-sans">
+                            Privé By The Sea
+                          </p>
+                          <p className="text-xs sm:text-sm text-[#F6E4CC]/80 font-light leading-relaxed font-sans">
+                            Vistamar Beach & Residential Estates, Lapu-Lapu City, Cebu
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </section>
   )
 }
