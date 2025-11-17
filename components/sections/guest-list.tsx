@@ -122,11 +122,12 @@ export function GuestList() {
     setIsSearching(false)
     
     // Set form data with existing guest info
+    // Guest is always set to "1" - each name represents one guest
     setFormData({
       Name: guest.Name,
       Email: guest.Email && guest.Email !== "Pending" ? guest.Email : "",
       RSVP: guest.RSVP || "",
-      Guest: guest.Guest && guest.Guest !== "" ? guest.Guest : "1",
+      Guest: "1", // Always 1 guest per name
       Message: guest.Message || "",
     })
     
@@ -153,12 +154,7 @@ export function GuestList() {
       return
     }
 
-    // Validate guest count if attending
-    if (formData.RSVP === "Yes" && (!formData.Guest || parseInt(formData.Guest) < 1)) {
-      setError("Please enter the number of guests (minimum 1)")
-      setTimeout(() => setError(null), 5000)
-      return
-    }
+    // Guest count is always 1, no validation needed
 
     setIsLoading(true)
     setError(null)
@@ -176,7 +172,7 @@ export function GuestList() {
           Name: formData.Name,
           Email: formData.Email || "Pending",
           RSVP: formData.RSVP,
-          Guest: formData.RSVP === "Yes" ? (formData.Guest || "1") : "0",
+          Guest: formData.RSVP === "Yes" ? "1" : "0",
           Message: formData.Message,
         }),
       })
@@ -235,7 +231,10 @@ export function GuestList() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestFormData),
+        body: JSON.stringify({
+          ...requestFormData,
+          Guest: "1", // Always set to 1 guest per name
+        }),
       })
 
       if (!response.ok) {
@@ -571,25 +570,7 @@ export function GuestList() {
                       </div>
                     </div>
 
-                    {/* Number of Guests - Only show when RSVP is "Yes" */}
-                    {formData.RSVP === "Yes" && (
-                      <div>
-                        <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-lg font-semibold text-[#51181E] mb-1.5 sm:mb-2 md:mb-3 font-sans">
-                          <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-[#BC9751] flex-shrink-0" />
-                          <span className="leading-tight">Number of Guests *</span>
-                        </label>
-                        <input
-                          type="number"
-                          name="Guest"
-                          value={formData.Guest}
-                          onChange={handleFormChange}
-                          min="1"
-                          required
-                          placeholder="How many guests?"
-                          className="w-full px-2.5 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-2 border-[#BC9751]/30 focus:border-[#BC9751] rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-sans placeholder:text-[#51181E]/40 transition-all duration-300 focus:ring-2 focus:ring-[#BC9751]/20 bg-white"
-                        />
-                      </div>
-                    )}
+                    {/* Number of Guests - Hidden, always defaults to 1 */}
 
                     {/* Message to the couple */}
                     <div>
@@ -812,23 +793,7 @@ export function GuestList() {
                     />
                   </div>
 
-                  {/* Number of Guests */}
-                  <div>
-                    <label className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-lg font-semibold text-[#51181E] mb-1.5 sm:mb-2 md:mb-3 font-sans">
-                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-[#BC9751] flex-shrink-0" />
-                      <span className="leading-tight">Number of Guests *</span>
-                    </label>
-                    <input
-                      type="number"
-                      name="Guest"
-                      value={requestFormData.Guest}
-                      onChange={(e) => setRequestFormData({ ...requestFormData, Guest: e.target.value })}
-                      min="1"
-                      required
-                      placeholder="How many guests?"
-                      className="w-full px-2.5 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-2 border-[#BC9751]/30 focus:border-[#BC9751] rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base font-sans placeholder:text-[#51181E]/40 transition-all duration-300 focus:ring-2 focus:ring-[#BC9751]/20 bg-white"
-                    />
-                  </div>
+                  {/* Number of Guests - Hidden, always defaults to 1 */}
 
                   {/* Message */}
                   <div>
