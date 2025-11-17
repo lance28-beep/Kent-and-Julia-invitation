@@ -69,7 +69,7 @@ export function Details() {
               <div className="inline-block mb-3 sm:mb-4">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#BC9751]/20 to-[#BC9751]/10 rounded-full blur-xl scale-150 opacity-50"></div>
                 <p className="relative text-xl sm:text-2xl md:text-3xl lg:text-4xl font-sans font-bold text-[#51181E] mb-2">
-                  January 2026
+                  January 22, 2026
               </p>
               </div>
               
