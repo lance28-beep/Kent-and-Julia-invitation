@@ -17,11 +17,11 @@ const ROLE_CATEGORY_ORDER = [
   "Parents of the Bride",
   "Best Man",
   "Maid/Matron of Honor",
+  "Groomsmen",
+  "Bridesmaids",
   "Candle Sponsors",
   "Veil Sponsors",
   "Cord Sponsors",
-  "Groomsmen",
-  "Bridesmaids",
   "Flower Girls",
   "Ring/Coin Bearers",
 ]
@@ -251,10 +251,10 @@ export function Entourage() {
                       )}
                       <TwoColumnLayout singleTitle="The Couple" centerContent={true}>
                         <div className="px-1 sm:px-2 md:px-3 lg:px-4">
-                          {groom && <NameItem member={groom} align="right" />}
+                          {bride && <NameItem member={bride} align="right" />}
                         </div>
                         <div className="px-1 sm:px-2 md:px-3 lg:px-4">
-                          {bride && <NameItem member={bride} align="left" />}
+                          {groom && <NameItem member={groom} align="left" />}
                         </div>
                       </TwoColumnLayout>
                     </div>
@@ -289,10 +289,10 @@ export function Entourage() {
                             <div className="h-px w-32 sm:w-48 bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent"></div>
                           </div>
                         )}
-                        <TwoColumnLayout leftTitle="Parents of the Groom" rightTitle="Parents of the Bride">
+                        <TwoColumnLayout leftTitle="Parents of the Bride" rightTitle="Parents of the Groom">
                           {(() => {
-                            const leftArr = sortParents(parentsGroom)
-                            const rightArr = sortParents(parentsBride)
+                            const leftArr = sortParents(parentsBride)
+                            const rightArr = sortParents(parentsGroom)
                             const maxLen = Math.max(leftArr.length, rightArr.length)
                             const rows = []
                             for (let i = 0; i < maxLen; i++) {
@@ -300,10 +300,10 @@ export function Entourage() {
                               const right = rightArr[i]
                               rows.push(
                                 <React.Fragment key={`parents-row-${i}`}>
-                                  <div key={`parent-groom-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                  <div key={`parent-bride-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`parent-bride-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                  <div key={`parent-groom-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -334,19 +334,19 @@ export function Entourage() {
                             <div className="h-px w-32 sm:w-48 bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent"></div>
                           </div>
                         )}
-                        <TwoColumnLayout leftTitle="Best Man" rightTitle="Maid/Matron of Honor">
+                        <TwoColumnLayout leftTitle="Maid/Matron of Honor" rightTitle="Best Man">
                           {(() => {
                             const maxLen = Math.max(bestMan.length, maidOfHonor.length)
                             const rows = []
                             for (let i = 0; i < maxLen; i++) {
-                              const left = bestMan[i]
-                              const right = maidOfHonor[i]
+                              const left = maidOfHonor[i]
+                              const right = bestMan[i]
                               rows.push(
                                 <React.Fragment key={`honor-row-${i}`}>
-                                  <div key={`bestman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                  <div key={`maid-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`maid-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                  <div key={`bestman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -377,20 +377,20 @@ export function Entourage() {
                             <div className="h-px w-32 sm:w-48 bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent"></div>
                           </div>
                         )}
-                        <TwoColumnLayout leftTitle="Groomsmen" rightTitle="Bridesmaids">
+                        <TwoColumnLayout leftTitle="Bridesmaids" rightTitle="Groomsmen">
                           {(() => {
                             const maxLen = Math.max(bridesmaids.length, groomsmen.length)
                             const rows = []
                             for (let i = 0; i < maxLen; i++) {
-                              const groomsman = groomsmen[i]
                               const bridesmaid = bridesmaids[i]
+                              const groomsman = groomsmen[i]
                               rows.push(
                                 <React.Fragment key={`bridal-row-${i}`}>
-                                  <div key={`groomsman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                                    {groomsman ? <NameItem member={groomsman} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
-                                  </div>
                                   <div key={`bridesmaid-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                                    {bridesmaid ? <NameItem member={bridesmaid} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
+                                    {bridesmaid ? <NameItem member={bridesmaid} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
+                                  </div>
+                                  <div key={`groomsman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                    {groomsman ? <NameItem member={groomsman} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
                               )
@@ -405,48 +405,6 @@ export function Entourage() {
                   return null
                 }
 
-                // Special handling for Candle/Veil Sponsors sections - combine into single two-column layout
-                if (category === "Candle Sponsors" || category === "Veil Sponsors") {
-                  // Get both sponsor groups
-                  const candleSponsors = grouped["Candle Sponsors"] || []
-                  const veilSponsors = grouped["Veil Sponsors"] || []
-                  
-                  // Only render once (when processing "Candle Sponsors")
-                  if (category === "Candle Sponsors") {
-                    return (
-                      <div key="Sponsors">
-                        {categoryIndex > 0 && (
-                          <div className="flex justify-center py-3 sm:py-4 mb-5 sm:mb-6 md:mb-8">
-                            <div className="h-px w-32 sm:w-48 bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent"></div>
-                          </div>
-                        )}
-                        <TwoColumnLayout leftTitle="Candle Sponsors" rightTitle="Veil Sponsors">
-                          {(() => {
-                            const maxLen = Math.max(candleSponsors.length, veilSponsors.length)
-                            const rows = []
-                            for (let i = 0; i < maxLen; i++) {
-                              const left = candleSponsors[i]
-                              const right = veilSponsors[i]
-                              rows.push(
-                                <React.Fragment key={`sponsors-row-${i}`}>
-                                  <div key={`candle-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                                    {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
-                                  </div>
-                                  <div key={`veil-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                                    {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
-                                  </div>
-                                </React.Fragment>
-                              )
-                            }
-                            return rows
-                          })()}
-                        </TwoColumnLayout>
-                      </div>
-                    )
-                  }
-                  // Skip rendering for "Veil Sponsors" since it's already rendered above
-                  return null
-                }
 
                 // Default: single title, centered content
                 return (
@@ -466,8 +424,38 @@ export function Entourage() {
                           "Bible Bearer",
                           "Presider",
                         ])
+                        // Special rule: Candle Sponsors with exactly 2 names - swap the order (second name on left, first name on right)
+                        if (category === "Candle Sponsors" && members.length === 2) {
+                          const left = members[1]
+                          const right = members[0]
+                          return (
+                            <>
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                <NameItem member={left} align="right" />
+                              </div>
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                <NameItem member={right} align="left" />
+                              </div>
+                            </>
+                          )
+                        }
                         // Special rule: Cord Sponsors with exactly 2 names should be displayed as two columns meeting at center
                         if (category === "Cord Sponsors" && members.length === 2) {
+                          const left = members[0]
+                          const right = members[1]
+                          return (
+                            <>
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                <NameItem member={left} align="right" />
+                              </div>
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
+                                <NameItem member={right} align="left" />
+                              </div>
+                            </>
+                          )
+                        }
+                        // Special rule: Veil Sponsors with exactly 2 names should be displayed as two columns meeting at center
+                        if (category === "Veil Sponsors" && members.length === 2) {
                           const left = members[0]
                           const right = members[1]
                           return (

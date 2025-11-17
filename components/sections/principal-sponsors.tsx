@@ -96,10 +96,6 @@ export function PrincipalSponsors() {
           <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#BC9751] drop-shadow-lg animate-spin-slow" />
           <div className="h-px w-16 sm:w-24 md:w-32 bg-gradient-to-l from-transparent via-[#BC9751]/70 to-[#BC9751] animate-expand" style={{ animationDelay: '0.3s' }} />
         </div>
-        
-        <p className="text-sm sm:text-base md:text-lg text-[#F6E4CC] font-sans max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
-          Our Beloved Godparents
-        </p>
       </div>
 
       {/* Enhanced Sponsors content with Animation */}
@@ -143,22 +139,22 @@ export function PrincipalSponsors() {
               ) : (
                 <div className="mb-4 sm:mb-5 md:mb-7 lg:mb-9">
                   <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 mb-2 sm:mb-2.5 md:mb-3.5 lg:mb-5">
-                    <SectionTitle align="right" className="pr-2 sm:pr-3 md:pr-4 lg:pr-6">Male Principal Sponsors</SectionTitle>
-                    <SectionTitle align="left" className="pl-2 sm:pl-3 md:pl-4 lg:pl-6">Female Principal Sponsors</SectionTitle>
+                    <SectionTitle align="right" className="pr-2 sm:pr-3 md:pr-4 lg:pr-6">Female Principal Sponsors</SectionTitle>
+                    <SectionTitle align="left" className="pl-2 sm:pl-3 md:pl-4 lg:pl-6">Male Principal Sponsors</SectionTitle>
                   </div>
                   <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 gap-y-1 sm:gap-y-1.5 md:gap-y-2 items-stretch">
                     {sponsorPairs.map((pair, idx) => (
                       <>
-                        <div key={`male-${idx}-${pair.MalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                          {pair.MalePrincipalSponsor ? (
-                            <NameItem name={pair.MalePrincipalSponsor} align="right" />
+                        <div key={`female-${idx}-${pair.FemalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                          {pair.FemalePrincipalSponsor ? (
+                            <NameItem name={pair.FemalePrincipalSponsor} align="right" />
                           ) : (
                             <div className="py-1 sm:py-1.5 md:py-2" />
                           )}
                         </div>
-                        <div key={`female-${idx}-${pair.FemalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
-                          {pair.FemalePrincipalSponsor ? (
-                            <NameItem name={pair.FemalePrincipalSponsor} align="left" />
+                        <div key={`male-${idx}-${pair.MalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
+                          {pair.MalePrincipalSponsor ? (
+                            <NameItem name={pair.MalePrincipalSponsor} align="left" />
                           ) : (
                             <div className="py-1 sm:py-1.5 md:py-2" />
                           )}
