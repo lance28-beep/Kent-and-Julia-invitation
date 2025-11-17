@@ -246,7 +246,7 @@ export function Hero() {
                       {/* Content */}
                       <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
-                          December 30.2018
+                          April 1, 2013
                         </p>
                         <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
                         <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
@@ -277,7 +277,7 @@ export function Hero() {
                       {/* Content */}
                       <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
-                          April 13.2025
+                          July 2, 2025
                         </p>
                         <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
                         <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
@@ -308,7 +308,7 @@ export function Hero() {
                       {/* Content */}
                       <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
                         <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
-                          November 15.2025
+                          January 22, 2026
                         </p>
                         <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
                         <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
