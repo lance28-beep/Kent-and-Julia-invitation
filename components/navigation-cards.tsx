@@ -160,32 +160,8 @@ export function NavigationCards() {
 
   return (
     <div className="relative pt-8 sm:pt-12 md:pt-16 lg:pt-20 pb-16 sm:pb-20 md:pb-24 lg:pb-28 overflow-hidden">
-      {/* Floral background decorations */}
+      {/* Subtle background decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Left bottom floral decoration */}
-        <Image
-          src="/decoration/rigth-bottom-corner-flower.png"
-          alt=""
-          aria-hidden="true"
-          width={512}
-          height={512}
-          className="absolute bottom-0 left-0 z-0 w-64 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] opacity-60 select-none pointer-events-none scale-x-[-1]"
-          loading="lazy"
-          quality={75}
-        />
-        
-        {/* Right bottom floral decoration */}
-        <Image
-          src="/decoration/rigth-bottom-corner-flower.png"
-          alt=""
-          aria-hidden="true"
-          width={512}
-          height={512}
-          className="absolute bottom-0 right-0 z-0 w-64 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] opacity-60 select-none pointer-events-none"
-          loading="lazy"
-          quality={75}
-        />
-        
         {/* Subtle background lines */}
         <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#BC9751]/10 to-transparent" />
         <div className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#BC9751]/10 to-transparent" />
