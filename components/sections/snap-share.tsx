@@ -2,19 +2,18 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "motion/react"
-import { Instagram, Facebook, Twitter, Share2, Copy, Check, Download, Camera, ArrowRight, Heart, Sparkles } from "lucide-react"
-import { QRCodeCanvas } from "qrcode.react"
+import { Instagram, Facebook, Twitter, Share2, Download, Camera, ArrowRight, Heart, Sparkles, QrCode, Upload } from "lucide-react"
+import { QRCodeSVG, QRCodeCanvas } from "qrcode.react"
 import { useRouter } from "next/navigation"
 
 export function SnapShare() {
   const router = useRouter()
-  const [copiedHashtag, setCopiedHashtag] = useState(false)
   const [scrollY, setScrollY] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
 
   const websiteUrl = typeof window !== "undefined" ? window.location.href : "https://example.com"
-  const hashtag = "#Kenthelpfallinginlovewithjulia"
-  const shareText = `Join us in celebrating our special day! Check out our wedding website: ${websiteUrl} ${hashtag} 💕`
+  const googleDriveUrl = "https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+  const shareText = `Join us in celebrating our special day! Check out our wedding website: ${websiteUrl} 💕`
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY)
@@ -30,15 +29,6 @@ export function SnapShare() {
     }
   }, [])
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text)
-      setCopiedHashtag(true)
-      setTimeout(() => setCopiedHashtag(false), 2000)
-    } catch (err) {
-      console.error("Failed to copy: ", err)
-    }
-  }
 
   const shareOnSocial = (platform: "instagram" | "facebook" | "twitter" | "tiktok") => {
     const encodedUrl = encodeURIComponent(websiteUrl)
@@ -125,32 +115,56 @@ export function SnapShare() {
                   </h3>
                 </div>
                 <p className="text-sm sm:text-base md:text-lg text-[#51181E]/80 font-sans leading-relaxed mb-4 sm:mb-6">
-                  Please share your photos and videos with us using our official hashtag.
+                  Your presence made our celebration unforgettable. We'd love to see the moments you captured! Every smile, every laugh, every precious memory—we want to treasure them all. Scan the QR code below or click the button to upload your photos directly to our shared gallery. It's quick, easy, and secure!
                 </p>
               </div>
 
-              {/* Hashtag Section */}
+              {/* QR Code Section for Google Drive Upload */}
               <div className="mb-6 sm:mb-8">
-                <div className="inline-flex items-center justify-center gap-3 bg-gradient-to-br from-[#BC9751]/20 via-[#BC9751]/10 to-[#BC9751]/5 px-4 sm:px-6 py-3 sm:py-4 rounded-xl shadow-lg border-2 border-[#BC9751]/50 hover:border-[#BC9751]/70 w-full sm:w-auto mx-auto transition-all duration-300 hover:shadow-xl">
-                  <span className="font-sans text-base sm:text-lg md:text-xl font-bold text-[#51181E] break-all sm:break-normal tracking-wide">
-                    {hashtag}
-                  </span>
-                    <button
-                      onClick={() => copyToClipboard(hashtag)}
-                    className="p-2 rounded-full bg-[#51181E]/10 hover:bg-[#51181E]/20 transition-colors duration-200 shadow-sm flex-shrink-0 ring-1 ring-[#BC9751]/40"
-                      title="Copy hashtag"
-                    >
-                    {copiedHashtag ? (
-                      <Check className="w-4 h-4 sm:w-5 sm:h-5 text-[#51181E]" />
-                    ) : (
-                      <Copy className="w-4 h-4 sm:w-5 sm:h-5 text-[#51181E]/70" />
-                    )}
-                    </button>
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <QrCode className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]" />
+                  <p className="text-xs sm:text-sm text-[#51181E]/75 font-sans text-center font-medium">
+                    Scan to upload your photos instantly
+                  </p>
+                </div>
+                <div className="flex items-center justify-center mb-4">
+                  <div className="relative inline-flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-[#FFFFFF] via-[#F6E4CC] to-[#FFFFFF] rounded-xl sm:rounded-2xl shadow-xl border-2 border-[#BC9751]/50 group-hover:border-[#BC9751]/70 group-hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
+                    {/* Decorative corner accents */}
+                    <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#BC9751]/40 rounded-tl-lg" />
+                    <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[#BC9751]/40 rounded-tr-lg" />
+                    <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#BC9751]/40 rounded-bl-lg" />
+                    <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#BC9751]/40 rounded-br-lg" />
+                    {/* QR Code */}
+                    <QRCodeSVG
+                      value={googleDriveUrl}
+                      size={isMobile ? 160 : 180}
+                      level="H"
+                      includeMargin={true}
+                      fgColor="#51181E"
+                      bgColor="#FFFFFF"
+                      className="w-[140px] h-[140px] sm:w-[160px] sm:h-[160px] md:w-[180px] md:h-[180px]"
+                    />
                   </div>
-                <p className="text-xs sm:text-sm text-[#51181E]/70 font-sans text-center mt-3 sm:mt-4">
-                  Use this hashtag on your posts to be featured in our gallery.
+                </div>
+                <p className="text-xs sm:text-sm text-[#51181E]/70 font-sans text-center mb-4 sm:mb-6">
+                  Point your camera at the QR code to open our photo upload folder. It's quick, easy, and secure!
                 </p>
-            </div>
+                
+                {/* Upload Button */}
+                <div className="text-center">
+                  <a
+                    href={googleDriveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/upload inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r from-[#BC9751] via-[#D4B87A] to-[#BC9751] hover:from-[#D4B87A] hover:via-[#BC9751] hover:to-[#D4B87A] text-[#51181E] rounded-xl font-sans font-bold text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#BC9751]/50 hover:border-[#BC9751]/80 relative overflow-hidden"
+                  >
+                    <Upload className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-transform duration-300 group-hover/upload:translate-y-[-2px]" />
+                    <span className="relative z-10">Upload Photos to Google Drive</span>
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/upload:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover/upload:translate-x-full" />
+                  </a>
+                </div>
+              </div>
 
               {/* Gallery Button */}
               <div className="text-center">

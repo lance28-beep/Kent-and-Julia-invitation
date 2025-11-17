@@ -23,7 +23,7 @@ export function PrincipalSponsors() {
     const textAlign =
       align === "right" ? "text-right" : align === "left" ? "text-left" : "text-center"
     return (
-      <h3 className={`font-sans text-sm sm:text-base md:text-lg lg:text-xl font-bold uppercase text-[#51181E] mb-2 sm:mb-3 md:mb-4 tracking-wider ${textAlign} ${className}`}>
+      <h3 className={`font-sans text-[10px] sm:text-xs md:text-sm lg:text-base font-bold uppercase text-[#51181E] mb-1.5 sm:mb-2 md:mb-3 tracking-wide sm:tracking-wider ${textAlign} ${className}`}>
         {children}
       </h3>
     )
@@ -36,8 +36,8 @@ export function PrincipalSponsors() {
     const textAlign =
       align === "right" ? "text-right" : align === "left" ? "text-left" : "text-center"
     return (
-      <div className={`flex flex-col ${containerAlign} justify-center py-1.5 sm:py-2 md:py-2.5 w-full group/item hover:bg-[#BC9751]/10 rounded-lg px-2 transition-colors duration-200`}>
-        <p className={`text-[#51181E] text-sm sm:text-base md:text-lg font-semibold leading-snug break-words ${textAlign}`}>{name}</p>
+      <div className={`flex flex-col ${containerAlign} justify-center py-1 sm:py-1.5 md:py-2 w-full group/item hover:bg-[#BC9751]/10 rounded-lg px-1 sm:px-2 transition-colors duration-200`}>
+        <p className={`text-[#51181E] text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold whitespace-nowrap overflow-hidden text-ellipsis ${textAlign}`} style={{ maxWidth: '100%' }}>{name}</p>
       </div>
     )
   }
@@ -141,22 +141,22 @@ export function PrincipalSponsors() {
                   <p className="text-[#51181E] font-sans text-sm sm:text-base md:text-lg">No sponsors yet</p>
                 </div>
               ) : (
-                <div className="mb-5 sm:mb-7 md:mb-9 lg:mb-12">
-                  <div className="grid grid-cols-1 min-[350px]:grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 mb-2.5 sm:mb-3.5 md:mb-5">
-                    <SectionTitle align="right" className="pr-3 sm:pr-4 md:pr-6">Male Principal Sponsors</SectionTitle>
-                    <SectionTitle align="left" className="pl-3 sm:pl-4 md:pl-6">Female Principal Sponsors</SectionTitle>
+                <div className="mb-4 sm:mb-5 md:mb-7 lg:mb-9">
+                  <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 mb-2 sm:mb-2.5 md:mb-3.5 lg:mb-5">
+                    <SectionTitle align="right" className="pr-2 sm:pr-3 md:pr-4 lg:pr-6">Male Principal Sponsors</SectionTitle>
+                    <SectionTitle align="left" className="pl-2 sm:pl-3 md:pl-4 lg:pl-6">Female Principal Sponsors</SectionTitle>
                   </div>
-                  <div className="grid grid-cols-1 min-[350px]:grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-1.5 sm:gap-y-2 md:gap-y-3 items-stretch">
+                  <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 gap-y-1 sm:gap-y-1.5 md:gap-y-2 items-stretch">
                     {sponsorPairs.map((pair, idx) => (
                       <>
-                        <div key={`male-${idx}-${pair.MalePrincipalSponsor || 'empty'}`} className="px-3 sm:px-4 md:px-6">
+                        <div key={`male-${idx}-${pair.MalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                           {pair.MalePrincipalSponsor ? (
                             <NameItem name={pair.MalePrincipalSponsor} align="right" />
                           ) : (
                             <div className="py-1 sm:py-1.5 md:py-2" />
                           )}
                         </div>
-                        <div key={`female-${idx}-${pair.FemalePrincipalSponsor || 'empty'}`} className="px-3 sm:px-4 md:px-6">
+                        <div key={`female-${idx}-${pair.FemalePrincipalSponsor || 'empty'}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                           {pair.FemalePrincipalSponsor ? (
                             <NameItem name={pair.FemalePrincipalSponsor} align="left" />
                           ) : (

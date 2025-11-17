@@ -17,7 +17,7 @@ const faqItems: FAQItem[] = [
   {
     question: "When and where is the ceremony?",
     answer:
-      "The ceremony will be held on January 2026 at 2:30 PM. Please arrive by 2:00 PM. The ceremony will take place at San Roque Parish, Cordova, Cebu, Philippines.",
+      "The ceremony will be held on January 22,2026 at 2:30 PM. Please arrive by 2:00 PM. The ceremony will take place at San Roque Parish, Cordova, Cebu, Philippines.",
   },
   {
     question: "Where is the reception?",
@@ -37,7 +37,7 @@ const faqItems: FAQItem[] = [
   {
     question: "Do you have a gift registry?",
     answer:
-      "With all that we have, we are truly blessed. Your presence and prayers are all that we request, as our day is complete having you as a guest. But if you desire, nonetheless, a monetary gift is one we humbly request. You can use the GCash QR code available in the Gift Guide section.",
+      "With all that we have, we are truly blessed. Your presence and prayers are all that we request, as our day is complete having you as a guest. But if you desire, nonetheless, a monetary gift is one we humbly request.",
   },
   {
     question: "Is there parking available?",

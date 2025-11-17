@@ -1,11 +1,9 @@
 "use client"
 
-import { Heart, ChevronDown, ChevronUp, Gift, Sparkles } from "lucide-react"
-import Image from "next/image"
+import { Heart, Gift, Sparkles } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export function Registry() {
-  const [showQRCode, setShowQRCode] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -82,73 +80,6 @@ export function Registry() {
                   
                   {/* Decorative bottom border */}
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 sm:w-24 md:w-32 h-px bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent"></div>
-                </div>
-              </div>
-              
-              {/* Enhanced Toggle Button */}
-              <button
-                onClick={() => setShowQRCode(!showQRCode)}
-                className="group/btn flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-3.5 bg-gradient-to-r from-[#51181E] via-[#6D2028] to-[#51181E] hover:from-[#6D2028] hover:via-[#51181E] hover:to-[#6D2028] text-[#FFFFFF] rounded-lg sm:rounded-xl font-sans font-bold text-sm sm:text-base transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl border-2 border-[#BC9751]/30 hover:border-[#BC9751]/60 relative overflow-hidden mt-2 sm:mt-4"
-                aria-label={showQRCode ? "Hide QR Code" : "Show QR Code"}
-              >
-                <span className="relative z-10">{showQRCode ? "Hide" : "Show"} GCash QR Code</span>
-                <div className="relative z-10">
-                  {showQRCode ? (
-                    <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300" />
-                  )}
-                </div>
-                {/* Shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full" />
-              </button>
-              
-              {/* QR Code Section - Animated */}
-              <div
-                className={`overflow-hidden transition-all duration-700 ease-in-out ${
-                  showQRCode
-                    ? "max-h-[900px] opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="flex flex-col items-center space-y-4 sm:space-y-5 md:space-y-6 pt-4 sm:pt-6 md:pt-8">
-                  {/* Decorative divider */}
-                  <div className="w-20 sm:w-32 md:w-40 h-px bg-gradient-to-r from-transparent via-[#BC9751]/40 to-transparent"></div>
-                  
-                  {/* GCash Label */}
-                  <div className="text-center space-y-1 sm:space-y-2">
-                    <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-sans font-bold text-[#51181E] mb-1">
-                      GCash
-                    </h4>
-                    <p className="text-xs sm:text-sm md:text-base text-[#51181E]/70 font-sans">
-                      Scan to send your gift
-                    </p>
-                  </div>
-                  
-                  {/* Enhanced QR Code Image */}
-                  <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 bg-white rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 shadow-2xl border-2 border-[#BC9751]/60 hover:border-[#BC9751]/80 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(188,151,81,0.4)] group">
-                    <Image
-                      src="/QR/GCASH.png"
-                      alt="GCash QR Code - Scan to send monetary gift"
-                      fill
-                      className="object-contain rounded-lg group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 288px"
-                      priority
-                    />
-                    {/* Subtle glow effect */}
-                    <div className="absolute inset-0 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#BC9751]/0 via-[#BC9751]/5 to-[#BC9751]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                  </div>
-                  
-                  {/* Instructions */}
-                  <div className="text-center space-y-2 sm:space-y-3 pt-1">
-                    <p className="text-xs sm:text-sm md:text-base text-[#51181E]/70 font-sans font-medium">
-                      Open GCash app → Scan QR → Enter amount
-                    </p>
-                    <div className="flex items-center justify-center gap-2 text-xs sm:text-sm md:text-base text-[#BC9751] font-medium">
-                      <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
-                      <span className="font-sans">Thank you for your generosity</span>
-                    </div>
-                  </div>
                 </div>
               </div>
               

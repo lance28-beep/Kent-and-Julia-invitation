@@ -2,9 +2,9 @@
 
 import { Suspense, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
-import Link from "next/link"
 import { BackButton } from "@/components/back-button"
-import { Camera, Sparkles, ArrowRight, Heart, Image as ImageIcon, Upload } from "lucide-react"
+import { Camera, Sparkles, Heart, Upload, QrCode } from "lucide-react"
+import { QRCodeSVG } from "qrcode.react"
 
 const Silk = dynamic(() => import("@/components/silk"), { ssr: false })
 
@@ -51,7 +51,7 @@ export default function GalleryPage() {
               <div className="h-px w-16 sm:w-24 md:w-32 bg-gradient-to-l from-transparent via-[#BC9751]/70 to-[#BC9751] animate-expand" style={{ animationDelay: '0.3s' }} />
             </div>
             <p className="text-sm sm:text-base md:text-lg text-[#FFFFFF] font-sans font-light tracking-wide uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
-              Our Cherished Moments
+              Share Your Precious Memories With Us
             </p>
           </div>
 
@@ -102,41 +102,45 @@ export default function GalleryPage() {
                 {/* Enhanced Main Message */}
                 <div className="text-center space-y-5 sm:space-y-6 md:space-y-7">
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#51181E] leading-tight drop-shadow-md">
-                    Our Gallery Is Coming Soon
+                    Capture & Share Your Moments
                   </h2>
                   <div className="h-px w-24 sm:w-32 md:w-40 mx-auto bg-gradient-to-r from-transparent via-[#BC9751]/60 to-transparent" />
                   <p className="text-base sm:text-lg md:text-xl text-[#51181E]/85 font-sans leading-relaxed max-w-2xl mx-auto">
-                    We're preparing something special! Soon you'll be able to view and share your favorite moments from our celebration. Every photo tells a story, and we can't wait to share ours with you.
+                    Your presence made our celebration unforgettable. We'd love to see the moments you captured! Scan the QR code below or click the button to upload your photos directly to our shared gallery. Every smile, every laugh, every precious memory—we want to treasure them all.
                   </p>
                 </div>
 
-                {/* Enhanced Hashtag Section */}
+                {/* QR Code Section for Google Drive Upload */}
                 <div className="w-full space-y-5 sm:space-y-6">
-                  <div className="flex items-center justify-center gap-2">
-                    <ImageIcon className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]" />
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <QrCode className="w-4 h-4 sm:w-5 sm:h-5 text-[#BC9751]" />
                     <p className="text-sm sm:text-base md:text-lg text-[#51181E]/75 font-sans text-center font-medium">
-                      Use our official hashtag to share your photos:
+                      Scan to upload your photos instantly
                     </p>
                   </div>
                   <div className="flex items-center justify-center">
-                    <div className="inline-flex items-center gap-3 sm:gap-4 bg-gradient-to-br from-[#BC9751]/20 via-[#BC9751]/10 to-[#BC9751]/5 px-6 sm:px-8 py-4 sm:py-5 rounded-2xl shadow-lg border-2 border-[#BC9751]/50 group-hover:border-[#BC9751]/70 group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                      <span className="font-sans text-lg sm:text-xl md:text-2xl font-bold text-[#51181E] break-all sm:break-normal tracking-wide">
-                        #Kenthelpfallinginlovewithjulia
-                      </span>
+                    <div className="relative inline-flex items-center justify-center p-6 sm:p-8 bg-gradient-to-br from-[#FFFFFF] via-[#F6E4CC] to-[#FFFFFF] rounded-2xl sm:rounded-3xl shadow-2xl border-2 border-[#BC9751]/50 group-hover:border-[#BC9751]/70 group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                      {/* Decorative corner accents */}
+                      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[#BC9751]/40 rounded-tl-lg" />
+                      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[#BC9751]/40 rounded-tr-lg" />
+                      <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[#BC9751]/40 rounded-bl-lg" />
+                      <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#BC9751]/40 rounded-br-lg" />
+                      {/* QR Code */}
+                      <QRCodeSVG
+                        value="https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+                        size={200}
+                        level="H"
+                        includeMargin={true}
+                        fgColor="#51181E"
+                        bgColor="#FFFFFF"
+                        className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] md:w-[220px] md:h-[220px]"
+                      />
                     </div>
                   </div>
+                  <p className="text-xs sm:text-sm text-[#51181E]/70 font-sans text-center max-w-md mx-auto">
+                    Point your camera at the QR code to open our photo upload folder. It's quick, easy, and secure!
+                  </p>
                 </div>
-
-                {/* Enhanced CTA Button */}
-                <Link
-                  href="/snap-share"
-                  className="group/btn inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-4.5 bg-gradient-to-r from-[#51181E] via-[#6D2028] to-[#51181E] hover:from-[#6D2028] hover:via-[#51181E] hover:to-[#6D2028] text-[#FFFFFF] rounded-xl sm:rounded-2xl font-sans font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#BC9751]/30 hover:border-[#BC9751]/60 relative overflow-hidden"
-                >
-                  <span className="relative z-10">Learn More About Sharing</span>
-                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                  {/* Shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full" />
-                </Link>
 
                 {/* Share Photos Button */}
                 <a
@@ -146,7 +150,7 @@ export default function GalleryPage() {
                   className="group/share inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-4.5 bg-gradient-to-r from-[#BC9751] via-[#D4B87A] to-[#BC9751] hover:from-[#D4B87A] hover:via-[#BC9751] hover:to-[#D4B87A] text-[#51181E] rounded-xl sm:rounded-2xl font-sans font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#BC9751]/50 hover:border-[#BC9751]/80 relative overflow-hidden"
                 >
                   <Upload className="w-5 h-5 sm:w-6 sm:h-6 relative z-10 transition-transform duration-300 group-hover/share:translate-y-[-2px]" />
-                  <span className="relative z-10">Share Your Photos</span>
+                  <span className="relative z-10">Upload Photos to Google Drive</span>
                   {/* Shine effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover/share:opacity-100 transition-opacity duration-500 transform -skew-x-12 -translate-x-full group-hover/share:translate-x-full" />
                 </a>

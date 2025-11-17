@@ -95,7 +95,7 @@ export function Entourage() {
     const textAlign =
       align === "right" ? "text-right" : align === "left" ? "text-left" : "text-center"
     return (
-      <h3 className={`font-sans text-sm sm:text-base md:text-lg lg:text-xl font-bold uppercase text-[#51181E] mb-2 sm:mb-3 md:mb-4 tracking-wider ${textAlign} ${className}`}>
+      <h3 className={`font-sans text-[10px] sm:text-xs md:text-sm lg:text-base font-bold uppercase text-[#51181E] mb-1.5 sm:mb-2 md:mb-3 tracking-wide sm:tracking-wider ${textAlign} ${className}`}>
         {children}
       </h3>
     )
@@ -116,10 +116,10 @@ export function Entourage() {
     const textAlign =
       align === "right" ? "text-right" : align === "left" ? "text-left" : "text-center"
     return (
-      <div className={`flex flex-col ${containerAlign} justify-center py-1.5 sm:py-2 md:py-2.5 leading-relaxed group/item hover:bg-[#BC9751]/10 rounded-lg px-2 transition-colors duration-200`}>
-        <p className={`text-[#51181E] text-sm sm:text-base md:text-lg font-semibold ${textAlign}`}>{member.Name}</p>
+      <div className={`flex flex-col ${containerAlign} justify-center py-1 sm:py-1.5 md:py-2 leading-relaxed group/item hover:bg-[#BC9751]/10 rounded-lg px-1 sm:px-2 transition-colors duration-200`}>
+        <p className={`text-[#51181E] text-[10px] sm:text-xs md:text-sm lg:text-base font-semibold ${textAlign} whitespace-nowrap overflow-hidden text-ellipsis`} style={{ maxWidth: '100%' }}>{member.Name}</p>
         {showRole && member.RoleTitle && (
-          <p className={`text-[#51181E]/70 text-xs sm:text-sm md:text-base font-normal mt-0.5 sm:mt-1 leading-snug ${textAlign}`}>
+          <p className={`text-[#51181E]/70 text-[9px] sm:text-[10px] md:text-xs lg:text-sm font-normal mt-0.5 leading-snug ${textAlign} whitespace-nowrap overflow-hidden text-ellipsis`} style={{ maxWidth: '100%' }}>
             {member.RoleTitle}
           </p>
         )}
@@ -143,9 +143,9 @@ export function Entourage() {
   }) => {
     if (singleTitle) {
       return (
-        <div className="mb-5 sm:mb-7 md:mb-9 lg:mb-12">
+        <div className="mb-4 sm:mb-5 md:mb-7 lg:mb-9">
           <SectionTitle>{singleTitle}</SectionTitle>
-          <div className={`grid grid-cols-1 min-[350px]:grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-1.5 sm:gap-y-2 md:gap-y-3 ${centerContent ? 'max-w-2xl mx-auto' : ''}`}>
+          <div className={`grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 gap-y-1 sm:gap-y-1.5 md:gap-y-2 ${centerContent ? 'max-w-2xl mx-auto' : ''}`}>
             {children}
           </div>
         </div>
@@ -153,16 +153,16 @@ export function Entourage() {
     }
 
     return (
-      <div className="mb-5 sm:mb-7 md:mb-9 lg:mb-12">
-        <div className="grid grid-cols-1 min-[350px]:grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 mb-2.5 sm:mb-3.5 md:mb-5">
+      <div className="mb-4 sm:mb-5 md:mb-7 lg:mb-9">
+        <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 mb-2 sm:mb-2.5 md:mb-3.5 lg:mb-5">
           {leftTitle && (
-            <SectionTitle align="right" className="pr-3 sm:pr-4 md:pr-6">{leftTitle}</SectionTitle>
+            <SectionTitle align="right" className="pr-2 sm:pr-3 md:pr-4 lg:pr-6">{leftTitle}</SectionTitle>
           )}
           {rightTitle && (
-            <SectionTitle align="left" className="pl-3 sm:pl-4 md:pl-6">{rightTitle}</SectionTitle>
+            <SectionTitle align="left" className="pl-2 sm:pl-3 md:pl-4 lg:pl-6">{rightTitle}</SectionTitle>
           )}
         </div>
-        <div className={`grid grid-cols-1 min-[350px]:grid-cols-2 gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-1.5 sm:gap-y-2 md:gap-y-3 ${centerContent ? 'max-w-2xl mx-auto' : ''}`}>
+        <div className={`grid grid-cols-1 min-[320px]:grid-cols-2 gap-x-1 sm:gap-x-2 md:gap-x-3 lg:gap-x-4 gap-y-1 sm:gap-y-1.5 md:gap-y-2 ${centerContent ? 'max-w-2xl mx-auto' : ''}`}>
           {children}
         </div>
       </div>
@@ -191,10 +191,6 @@ export function Entourage() {
           <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#BC9751] drop-shadow-lg animate-spin-slow" />
           <div className="h-px w-16 sm:w-24 md:w-32 bg-gradient-to-l from-transparent via-[#BC9751]/70 to-[#BC9751] animate-expand" style={{ animationDelay: '0.3s' }} />
         </div>
-        
-        <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-bold text-[#F6E4CC] mb-2 sm:mb-3 drop-shadow-[0_2px_15px_rgba(0,0,0,0.7)]">
-          Organizational Chart
-        </h3>
       </div>
 
       {/* Enhanced Central Card Container with Animation */}
@@ -254,10 +250,10 @@ export function Entourage() {
                         </div>
                       )}
                       <TwoColumnLayout singleTitle="The Couple" centerContent={true}>
-                        <div className="px-3 sm:px-4 md:px-6">
+                        <div className="px-1 sm:px-2 md:px-3 lg:px-4">
                           {groom && <NameItem member={groom} align="right" />}
                         </div>
-                        <div className="px-3 sm:px-4 md:px-6">
+                        <div className="px-1 sm:px-2 md:px-3 lg:px-4">
                           {bride && <NameItem member={bride} align="left" />}
                         </div>
                       </TwoColumnLayout>
@@ -304,10 +300,10 @@ export function Entourage() {
                               const right = rightArr[i]
                               rows.push(
                                 <React.Fragment key={`parents-row-${i}`}>
-                                  <div key={`parent-groom-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`parent-groom-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`parent-bride-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`parent-bride-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -347,10 +343,10 @@ export function Entourage() {
                               const right = maidOfHonor[i]
                               rows.push(
                                 <React.Fragment key={`honor-row-${i}`}>
-                                  <div key={`bestman-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`bestman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`maid-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`maid-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -390,10 +386,10 @@ export function Entourage() {
                               const bridesmaid = bridesmaids[i]
                               rows.push(
                                 <React.Fragment key={`bridal-row-${i}`}>
-                                  <div key={`groomsman-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`groomsman-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {groomsman ? <NameItem member={groomsman} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`bridesmaid-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`bridesmaid-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {bridesmaid ? <NameItem member={bridesmaid} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -433,10 +429,10 @@ export function Entourage() {
                               const right = veilSponsors[i]
                               rows.push(
                                 <React.Fragment key={`sponsors-row-${i}`}>
-                                  <div key={`candle-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`candle-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {left ? <NameItem member={left} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
-                                  <div key={`veil-cell-${i}`} className="px-3 sm:px-4 md:px-6">
+                                  <div key={`veil-cell-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                     {right ? <NameItem member={right} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                                   </div>
                                 </React.Fragment>
@@ -476,10 +472,10 @@ export function Entourage() {
                           const right = members[1]
                           return (
                             <>
-                              <div className="px-3 sm:px-4 md:px-6">
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 <NameItem member={left} align="right" />
                               </div>
-                              <div className="px-3 sm:px-4 md:px-6">
+                              <div className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 <NameItem member={right} align="left" />
                               </div>
                             </>
@@ -507,10 +503,10 @@ export function Entourage() {
                           const r = right[i]
                           rows.push(
                             <React.Fragment key={`${category}-row-${i}`}>
-                              <div key={`${category}-cell-left-${i}`} className="px-3 sm:px-4 md:px-6">
+                              <div key={`${category}-cell-left-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 {l ? <NameItem member={l} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                               </div>
-                              <div key={`${category}-cell-right-${i}`} className="px-3 sm:px-4 md:px-6">
+                              <div key={`${category}-cell-right-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 {r ? <NameItem member={r} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                               </div>
                             </React.Fragment>
@@ -555,10 +551,10 @@ export function Entourage() {
                           const r = right[i]
                           rows.push(
                             <React.Fragment key={`${category}-row-${i}`}>
-                              <div key={`${category}-cell-left-${i}`} className="px-3 sm:px-4 md:px-6">
+                              <div key={`${category}-cell-left-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 {l ? <NameItem member={l} align="right" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                               </div>
-                              <div key={`${category}-cell-right-${i}`} className="px-3 sm:px-4 md:px-6">
+                              <div key={`${category}-cell-right-${i}`} className="px-1 sm:px-2 md:px-3 lg:px-4">
                                 {r ? <NameItem member={r} align="left" /> : <div className="py-1 sm:py-1.5 md:py-2" />}
                               </div>
                             </React.Fragment>

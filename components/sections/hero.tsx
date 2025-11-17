@@ -14,6 +14,7 @@ export function Hero() {
   const [isVisible, setIsVisible] = useState(false)
   const [showInvitation, setShowInvitation] = useState(false)
   const [showCountdown, setShowCountdown] = useState(false)
+  const [showLoveStory, setShowLoveStory] = useState(false)
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -25,6 +26,7 @@ export function Hero() {
     setIsVisible(true)
     setTimeout(() => setShowInvitation(true), 300)
     setTimeout(() => setShowCountdown(true), 600)
+    setTimeout(() => setShowLoveStory(true), 900)
   }, [])
 
   useEffect(() => {
@@ -122,7 +124,7 @@ export function Hero() {
                 </p>
                 
                 <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FFFFFF]/98 drop-shadow-xl leading-relaxed bonheur-royale-regular mb-0 pb-0">
-                  we humbly request the honor of your presence
+                  we humbly request the honour of your presence
                 </p>
                 
                 <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#FFFFFF]/98 drop-shadow-xl leading-relaxed bonheur-royale-regular mb-0 pb-0">
@@ -203,15 +205,136 @@ export function Hero() {
                 </div>
               </div>
 
+            {/* Our Love Story Section */}
+            <div className={`space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12 pt-8 sm:pt-10 md:pt-12 lg:pt-14 xl:pt-16 transition-all duration-1000 ease-out delay-700 ${
+              showLoveStory ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
+              {/* Decorative divider */}
+              <div className="h-px w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56 mx-auto bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent shadow-[0_0_10px_rgba(188,151,81,0.3)] mb-6 sm:mb-8 md:mb-10 lg:mb-12" />
+              
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif text-[#FFFFFF] drop-shadow-xl text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16 xl:mb-20 px-4" style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
+                Our Love Story
+              </h2>
+
+              {/* Enhanced Elegant Timeline - Mobile Responsive */}
+              <div className="relative max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+                {/* Timeline Line - Horizontal for desktop, vertical for mobile */}
+                <div className="hidden md:block absolute top-1/2 left-6 right-6 lg:left-8 lg:right-8 h-[2px] bg-gradient-to-r from-transparent via-[#BC9751]/40 via-[#BC9751]/60 via-[#BC9751]/40 to-transparent transform -translate-y-1/2 shadow-[0_0_8px_rgba(188,151,81,0.3)]" />
+                <div className="md:hidden absolute left-1/2 top-4 bottom-4 w-[2.5px] bg-gradient-to-b from-transparent via-[#BC9751]/50 via-[#BC9751]/70 via-[#BC9751]/50 to-transparent transform -translate-x-1/2 shadow-[0_0_6px_rgba(188,151,81,0.4)]" />
+
+                {/* Timeline Milestones */}
+                <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16">
+                  {/* First Milestone */}
+                  <div className="relative flex flex-col items-center md:items-start space-y-3 sm:space-y-4 md:space-y-5 transform transition-all duration-500 active:scale-95 md:hover:scale-105 group">
+                    {/* Timeline Node */}
+                    <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-3 sm:gap-4 md:gap-5 w-full">
+                      <div className="flex-shrink-0 flex flex-col items-center relative mb-2 md:mb-0">
+                        {/* Outer glow ring */}
+                        <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full bg-[#BC9751]/20 blur-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Outer ring */}
+                        <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-7 md:h-7 lg:w-8 lg:h-8 rounded-full border-[2.5px] sm:border-[3px] border-[#BC9751] bg-gradient-to-br from-[#BC9751]/30 to-[#BC9751]/10 shadow-lg md:group-hover:shadow-xl md:group-hover:border-[#BC9751]/80 md:group-hover:bg-gradient-to-br md:group-hover:from-[#BC9751]/50 md:group-hover:to-[#BC9751]/20 transition-all duration-500">
+                          {/* Inner dot */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 rounded-full bg-[#BC9751] shadow-inner md:group-hover:scale-125 md:group-hover:shadow-lg transition-all duration-500" />
+                          </div>
+                        </div>
+                        {/* Sparkle effect */}
+                        <Sparkles className="hidden md:block absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 text-[#BC9751] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
+                          December 30.2018
+                        </p>
+                        <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
+                          We Met
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Second Milestone */}
+                  <div className="relative flex flex-col items-center md:items-start space-y-3 sm:space-y-4 md:space-y-5 transform transition-all duration-500 active:scale-95 md:hover:scale-105 group">
+                    {/* Timeline Node */}
+                    <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-3 sm:gap-4 md:gap-5 w-full">
+                      <div className="flex-shrink-0 flex flex-col items-center relative mb-2 md:mb-0">
+                        {/* Outer glow ring */}
+                        <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full bg-[#BC9751]/20 blur-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Outer ring */}
+                        <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-7 md:h-7 lg:w-8 lg:h-8 rounded-full border-[2.5px] sm:border-[3px] border-[#BC9751] bg-gradient-to-br from-[#BC9751]/30 to-[#BC9751]/10 shadow-lg md:group-hover:shadow-xl md:group-hover:border-[#BC9751]/80 md:group-hover:bg-gradient-to-br md:group-hover:from-[#BC9751]/50 md:group-hover:to-[#BC9751]/20 transition-all duration-500">
+                          {/* Inner dot */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 rounded-full bg-[#BC9751] shadow-inner md:group-hover:scale-125 md:group-hover:shadow-lg transition-all duration-500" />
+                          </div>
+                        </div>
+                        {/* Sparkle effect */}
+                        <Sparkles className="hidden md:block absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 text-[#BC9751] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
+                          April 13.2025
+                        </p>
+                        <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
+                          We Got Engaged
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Third Milestone */}
+                  <div className="relative flex flex-col items-center md:items-start space-y-3 sm:space-y-4 md:space-y-5 transform transition-all duration-500 active:scale-95 md:hover:scale-105 group">
+                    {/* Timeline Node */}
+                    <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-3 sm:gap-4 md:gap-5 w-full">
+                      <div className="flex-shrink-0 flex flex-col items-center relative mb-2 md:mb-0">
+                        {/* Outer glow ring */}
+                        <div className="absolute inset-0 w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 lg:w-12 lg:h-12 rounded-full bg-[#BC9751]/20 blur-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Outer ring */}
+                        <div className="relative w-7 h-7 sm:w-8 sm:h-8 md:w-7 md:h-7 lg:w-8 lg:h-8 rounded-full border-[2.5px] sm:border-[3px] border-[#BC9751] bg-gradient-to-br from-[#BC9751]/30 to-[#BC9751]/10 shadow-lg md:group-hover:shadow-xl md:group-hover:border-[#BC9751]/80 md:group-hover:bg-gradient-to-br md:group-hover:from-[#BC9751]/50 md:group-hover:to-[#BC9751]/20 transition-all duration-500">
+                          {/* Inner dot */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-3.5 md:h-3.5 lg:w-4 lg:h-4 rounded-full bg-[#BC9751] shadow-inner md:group-hover:scale-125 md:group-hover:shadow-lg transition-all duration-500" />
+                          </div>
+                        </div>
+                        {/* Sparkle effect */}
+                        <Sparkles className="hidden md:block absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 text-[#BC9751] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 text-center md:text-left pt-0 md:pt-1 space-y-2 sm:space-y-2.5 md:space-y-3 w-full max-w-xs sm:max-w-sm md:max-w-none mx-auto md:mx-0">
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#FFFFFF] font-serif font-bold mb-1 sm:mb-1.5 md:mb-2 drop-shadow-lg tracking-wide leading-tight">
+                          November 15.2025
+                        </p>
+                        <div className="h-[1.5px] sm:h-[2px] w-12 sm:w-16 md:w-20 lg:w-24 bg-gradient-to-r from-[#BC9751]/80 via-[#BC9751]/60 to-transparent mb-2 sm:mb-2.5 md:mb-3 mx-auto md:mx-0 shadow-[0_0_4px_rgba(188,151,81,0.4)]" />
+                        <p className="text-xs sm:text-sm md:text-base lg:text-lg text-[#BC9751] font-sans font-semibold tracking-[0.12em] sm:tracking-[0.15em] uppercase leading-tight">
+                          We Say "I Do"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
               {/* Venue and Ceremony Information */}
               <div className="space-y-6 sm:space-y-8 pt-10 sm:pt-12 md:pt-14">
                 {/* Decorative divider */}
                 <div className="h-px w-32 sm:w-40 md:w-48 lg:w-56 mx-auto bg-gradient-to-r from-transparent via-[#BC9751]/50 to-transparent shadow-[0_0_10px_rgba(188,151,81,0.3)]" />
                 
-                {/* Save the Date */}
-                <p className="text-sm sm:text-base md:text-lg text-[#BC9751] font-light tracking-[0.25em] uppercase text-center drop-shadow-lg font-sans">
-                  Save the Date
-                </p>
+                {/* Section Title */}
+                <div className="text-center space-y-3 sm:space-y-4">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-[#FFFFFF] drop-shadow-lg text-center" style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
+                    Join Us
+                  </h3>
+                  <p className="text-xs sm:text-sm md:text-base text-[#BC9751]/90 font-light tracking-[0.2em] uppercase text-center drop-shadow-md font-sans">
+                    Ceremony & Reception
+                  </p>
+                </div>
 
                 {/* Venue and Ceremony Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 max-w-4xl mx-auto">
