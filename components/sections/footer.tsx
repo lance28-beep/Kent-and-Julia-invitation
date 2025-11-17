@@ -120,7 +120,7 @@ export function Footer() {
             </h4>
             <div className="flex items-center gap-3 flex-wrap">
               <a 
-                href="https://www.facebook.com/airezjoy" 
+                href="https://www.facebook.com/ann.manayon.9"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-[#F6E4CC]/5 hover:bg-[#F6E4CC]/10 border border-[#BC9751]/20 hover:border-[#BC9751]/40 transition-colors"
