@@ -241,21 +241,11 @@ export function Details() {
               
               <div className="space-y-3 sm:space-y-4">
                 {/* Guests & Family */}
-                <div className="bg-gradient-to-br from-[#BC9751]/15 to-[#BC9751]/5 rounded-xl p-3 sm:p-4 md:p-5 border-2 border-[#BC9751]/40 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden relative group/guest">
+                <div className="bg-gradient-to-br from-[#BC9751]/15 to-[#BC9751]/5 rounded-xl p-3 sm:p-4 md:p-5 border-2 border-[#BC9751]/40 shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center gap-2 mb-2 sm:mb-3">
                     <div className="w-1 h-6 sm:h-8 bg-gradient-to-b from-[#51181E] to-[#BC9751] rounded-full"></div>
                     <p className="text-sm sm:text-base md:text-lg font-semibold text-[#51181E]">Guests & Family</p>
                 </div>
-                  {/* Guest Image - Full Aspect Ratio */}
-                  <div className="relative w-full mb-3 sm:mb-4 rounded-lg overflow-hidden" style={{ aspectRatio: '437 / 571' }}>
-                    <Image
-                      src="/Details/Guest.png"
-                      alt="Guests & Family Attire"
-                      fill
-                      className="object-contain transition-transform duration-500 group-hover/guest:scale-105"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 512px"
-                    />
-                  </div>
                   <div className="inline-block bg-[#51181E]/10 px-3 py-1 rounded-full mb-2 sm:mb-3">
                     <p className="text-xs sm:text-sm font-semibold text-[#51181E]">Semi-Formal</p>
                   </div>
@@ -272,7 +262,7 @@ export function Details() {
                   <div className="mt-3 sm:mt-4">
                     <p className="text-xs sm:text-sm font-semibold text-[#51181E] mb-2 sm:mb-3">Wedding Colors</p>
                     <div className="flex gap-2 sm:gap-2.5 md:gap-3 flex-wrap justify-center">
-                      {['#51181E', '#6D2028', '#BC9751', '#F6E4CC', '#FFFFFF'].map((color, index) => (
+                      {['#51181E', '#800020', '#6D2028', '#C79B42', '#DAB370', '#F6E1B6'].map((color, index) => (
                       <div
                         key={index}
                           className="relative group/color"
@@ -296,7 +286,7 @@ export function Details() {
                   {/* Sponsors Image - Full Aspect Ratio (437 x 571) */}
                   <div className="relative w-full mb-3 sm:mb-4 rounded-lg overflow-hidden" style={{ aspectRatio: '437 / 571' }}>
                     <Image
-                      src="/Details/sponsors.png"
+                      src="/Details/Guest.png"
                       alt="Principal Sponsors Attire"
                       fill
                       className="object-contain transition-transform duration-500 group-hover/sponsor:scale-105"
