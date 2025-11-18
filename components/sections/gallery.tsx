@@ -349,7 +349,7 @@ export function Gallery() {
         </a>
         
         <a
-          href="https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+          href="https://drive.google.com/drive/folders/18KE9csAk4bKDT1up17KWcB8exLOey3Mb?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
           className="group/share inline-flex items-center gap-2 px-6 sm:px-8 md:px-10 lg:px-12 py-3 sm:py-3.5 md:py-4 rounded-lg sm:rounded-xl font-semibold sm:font-bold transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm md:text-base whitespace-nowrap relative overflow-hidden border-2 backdrop-blur-sm"

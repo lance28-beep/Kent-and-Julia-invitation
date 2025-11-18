@@ -127,7 +127,7 @@ export default function GalleryPage() {
                       <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[#BC9751]/40 rounded-br-lg" />
                       {/* QR Code */}
                       <QRCodeSVG
-                        value="https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+                        value="https://drive.google.com/drive/folders/18KE9csAk4bKDT1up17KWcB8exLOey3Mb?usp=drive_link"
                         size={200}
                         level="H"
                         includeMargin={true}
@@ -144,7 +144,7 @@ export default function GalleryPage() {
 
                 {/* Share Photos Button */}
                 <a
-                  href="https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+                  href="https://drive.google.com/drive/folders/18KE9csAk4bKDT1up17KWcB8exLOey3Mb?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group/share inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-4.5 bg-gradient-to-r from-[#BC9751] via-[#D4B87A] to-[#BC9751] hover:from-[#D4B87A] hover:via-[#BC9751] hover:to-[#D4B87A] text-[#51181E] rounded-xl sm:rounded-2xl font-sans font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-[#BC9751]/50 hover:border-[#BC9751]/80 relative overflow-hidden"

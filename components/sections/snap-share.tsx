@@ -12,7 +12,7 @@ export function SnapShare() {
   const [isMobile, setIsMobile] = useState(false)
 
   const websiteUrl = typeof window !== "undefined" ? window.location.href : "https://example.com"
-  const googleDriveUrl = "https://drive.google.com/drive/folders/1fVNyW6bAqaWelamO3PLzjczHOEm1gX0J"
+  const googleDriveUrl = "https://drive.google.com/drive/folders/18KE9csAk4bKDT1up17KWcB8exLOey3Mb?usp=drive_link"
   const shareText = `Join us in celebrating our special day! Check out our wedding website: ${websiteUrl} 💕`
 
   useEffect(() => {
