@@ -258,6 +258,18 @@ export function Details() {
                   </p>
                 </div>
 
+                {/* Guests & Family Image */}
+                <div className="relative w-full mb-3 sm:mb-4 rounded-lg overflow-hidden">
+                  <Image
+                    src="/Details/details.png"
+                    alt="Guests & Family Attire Guide"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-contain rounded-lg"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 512px"
+                  />
+                </div>
+
                 {/* Color Palette */}
                   <div className="mt-3 sm:mt-4">
                     <p className="text-xs sm:text-sm font-semibold text-[#51181E] mb-2 sm:mb-3">Wedding Colors</p>
